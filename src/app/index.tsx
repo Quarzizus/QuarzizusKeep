@@ -1,7 +1,9 @@
+import { ContainerTasks } from "../components/containerTasks";
+
 const App = (): JSX.Element => {
   return (
     <>
-      <h1>App</h1>
+      <ContainerTasks />
     </>
   );
 };
