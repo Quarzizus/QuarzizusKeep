@@ -1,11 +1,23 @@
 import { TaskCard } from "../taskCard";
-import { GridTasks } from "./styles";
+import { Task } from "../task";
+import { ContainerTasksComponent } from "./styles";
 
 const ContainerTasks = (): JSX.Element => {
   return (
-    <GridTasks>
+    <ContainerTasksComponent>
       <TaskCard />
-    </GridTasks>
+      <TaskCard />
+      <TaskCard />
+      <TaskCard />
+      <TaskCard />
+      <TaskCard />
+      <TaskCard />
+      <TaskCard />
+      <TaskCard />
+      <TaskCard />
+      <TaskCard />
+      <TaskCard />
+    </ContainerTasksComponent>
   );
 };
 

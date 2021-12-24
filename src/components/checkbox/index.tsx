@@ -1,5 +1,7 @@
 import { useState } from "react";
-import { CheckBoxComponent } from "./styles";
+import { CheckBoxComponent, Icon } from "./styles";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCheck } from "@fortawesome/free-solid-svg-icons";
 
 const CheckBox = (): JSX.Element => {
   const [checked, setChecked] = useState(false);
@@ -8,7 +10,7 @@ const CheckBox = (): JSX.Element => {
   };
   return (
     <CheckBoxComponent onClick={handleClick}>
-      {checked && "X"}
+      {checked && <Icon icon={faCheck} />}
     </CheckBoxComponent>
   );
 };

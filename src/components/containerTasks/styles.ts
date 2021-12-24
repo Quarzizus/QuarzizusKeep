@@ -1,14 +1,10 @@
 import styled from "styled-components";
 
-const GridTasks = styled.section`
-  width: 100%;
-  /* background-color: blue; */
-  height: minmax(100vh, auto);
+const ContainerTasksComponent = styled.section`
+  background-color: #202124;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 1rem;
-  margin-left: 20px;
-  margin-top: 20px;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  grid-auto-rows: 100px;
+  width: 70%;
 `;
-
-export { GridTasks };
+export { ContainerTasksComponent };
