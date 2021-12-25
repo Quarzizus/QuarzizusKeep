@@ -2,6 +2,7 @@ import { TaskCardComponent, Icon } from "./styles";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
+import { Task } from "../task";
 
 const TaskCard = ({ id, title }: { id: string; title: string }) => {
   const { attributes, listeners, setNodeRef, transform, transition } =
@@ -21,13 +22,18 @@ const TaskCard = ({ id, title }: { id: string; title: string }) => {
       {...listeners}
     >
       <h3
-
-      // contentEditable="true"
-      // suppressContentEditableWarning={true}
-      // spellCheck="false"
+        contentEditable="true"
+        suppressContentEditableWarning={true}
+        spellCheck="false"
       >
         {title}
       </h3>
+      {console.log(attributes)}
+      <ul>
+        {Array.from({ length: Number(id) }, (_task) => {
+          return <Task text="Tarea por completar" />;
+        })}
+      </ul>
       <Icon icon={faEye} />
     </TaskCardComponent>
   );

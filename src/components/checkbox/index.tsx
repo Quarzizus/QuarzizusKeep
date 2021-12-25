@@ -7,6 +7,7 @@ const CheckBox = (): JSX.Element => {
   const [checked, setChecked] = useState(false);
   const handleClick = (): void => {
     setChecked(!checked);
+    console.log("Holiwi");
   };
   return (
     <CheckBoxComponent onClick={handleClick}>

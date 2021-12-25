@@ -1,6 +1,9 @@
 import { TaskCard } from "../taskCard";
 import { Task } from "../task";
-import { ContainerTasksComponent } from "./styles";
+// import { ContainerTasksComponent } from "./styles.js";
+import "./styles.css";
+import Masonry from "react-masonry-css";
+
 import {
   closestCenter,
   DndContext,
@@ -29,6 +32,8 @@ const ContainerTasks = (): JSX.Element => {
     "7",
     "8",
     "9",
+    "10",
+    "11",
   ]);
   const sensors = useSensors(
     useSensor(PointerSensor),
@@ -39,7 +44,8 @@ const ContainerTasks = (): JSX.Element => {
 
   function handleDragEnd(e: any) {
     const { active, over } = e;
-
+    console.log(e);
+    e.stopPropagation();
     if (active.id !== over.id) {
       setItems((items) => {
         const oldIndex = items.indexOf(active.id);
@@ -50,19 +56,28 @@ const ContainerTasks = (): JSX.Element => {
     }
   }
 
+  const breakpointColumnsObj = {
+    default: 4,
+    1100: 3,
+    700: 2,
+    500: 1,
+  };
+
   return (
-    <DndContext
-      sensors={sensors}
-      collisionDetection={closestCenter}
-      onDragEnd={handleDragEnd}
-    >
-      <ContainerTasksComponent>
-        <SortableContext items={items} strategy={verticalListSortingStrategy}>
+    <DndContext sensors={sensors} collisionDetection={closestCenter}>
+      <SortableContext items={items} strategy={verticalListSortingStrategy}>
+        <Masonry className="Masonry" breakpointCols={breakpointColumnsObj}>
           {items.map((numerito: string): JSX.Element => {
-            return <TaskCard key={numerito} id={numerito} title={numerito} />;
+            return (
+              <TaskCard
+                key={numerito}
+                id={numerito}
+                title={`Title ${numerito}`}
+              />
+            );
           })}
-        </SortableContext>
-      </ContainerTasksComponent>
+        </Masonry>
+      </SortableContext>
     </DndContext>
   );
 };

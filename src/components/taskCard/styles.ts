@@ -2,19 +2,21 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styled from "styled-components";
 
 const TaskCardComponent = styled.article`
-  width: 100%;
-  height: 100%;
   background-color: yellowgreen;
   border-radius: 10px;
   padding: 15px 20px;
   color: #fff;
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
-  align-items: center;
+  margin: 20px 10px 10px 20px;
   h3 {
     height: 30px;
     display: flex;
     align-items: center;
+  }
+  ul {
+    list-style: none;
   }
 `;
 
