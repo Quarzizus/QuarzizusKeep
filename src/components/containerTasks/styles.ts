@@ -7,5 +7,6 @@ const ContainerTasksComponent = styled.section`
   grid-auto-rows: 70px;
   width: 70%;
   gap: 20px;
+  padding: 15px;
 `;
 export { ContainerTasksComponent };
