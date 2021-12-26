@@ -1,12 +1,18 @@
 import styled from "styled-components";
 
 const TaskComponent = styled.li`
-  margin-top: 3px;
   height: 40px;
   display: flex;
   align-items: center;
-  &:focus {
-    outline: 1px solid white;
+
+  p {
+    width: 100%;
+  }
+  & p:focus {
+    outline: none;
+    border-bottom: 1px solid white;
+    font-weight: bold;
+    caret-color: black;
   }
 `;
 

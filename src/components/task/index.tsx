@@ -1,15 +1,23 @@
+import { useState } from "react";
 import { CheckBox } from "../checkbox";
 import { TaskComponent } from "./styles";
 
-const Task = ({ text }: { text: string }) => {
+interface props {
+  text: string;
+  open: boolean;
+}
+
+const Task = ({ text, open }: props) => {
   return (
-    <TaskComponent
-    // contentEditable="true"
-    // suppressContentEditableWarning={true}
-    // spellCheck="false"
-    >
+    <TaskComponent>
       <CheckBox />
-      {text}
+      <p
+        contentEditable={open}
+        suppressContentEditableWarning={true}
+        spellCheck={false}
+      >
+        {text}
+      </p>
     </TaskComponent>
   );
 };

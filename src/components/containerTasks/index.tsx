@@ -4,6 +4,7 @@ import "./styles.css";
 import Masonry from "react-masonry-css";
 import { useState } from "react";
 import { DroppableProvider } from "./DroppableProvider";
+import { ContainerMasonry, ContainerTasksComponent } from "./styles";
 
 const ContainerTasks = (): JSX.Element => {
   const [items, setItems] = useState([
@@ -30,7 +31,7 @@ const ContainerTasks = (): JSX.Element => {
 
   return (
     <DroppableProvider items={items} setItems={setItems}>
-      <Masonry className="Masonry" breakpointCols={breakpointColumnsObj}>
+      <ContainerMasonry className="WW" breakpointCols={breakpointColumnsObj}>
         {items.map((numerito: string): JSX.Element => {
           return (
             <TaskCard
@@ -40,7 +41,7 @@ const ContainerTasks = (): JSX.Element => {
             />
           );
         })}
-      </Masonry>
+      </ContainerMasonry>
     </DroppableProvider>
   );
 };
