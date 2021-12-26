@@ -1,5 +1,5 @@
 import { TaskCardComponent, Icon } from "./styles";
-import { faEye } from "@fortawesome/free-solid-svg-icons";
+import { faExpandArrowsAlt } from "@fortawesome/free-solid-svg-icons";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import { Task } from "../task";
@@ -14,27 +14,28 @@ const TaskCard = ({ id, title }: { id: string; title: string }) => {
     transform: CSS.Transform.toString(transform),
     transition,
   };
+
   return (
     <TaskCardComponent
       style={style}
       ref={setNodeRef}
-      {...attributes}
-      {...listeners}
+      onClick={() => console.log("holi")}
     >
-      <h3
-        contentEditable="true"
-        suppressContentEditableWarning={true}
-        spellCheck="false"
-      >
-        {title}
-      </h3>
-      {console.log(attributes)}
+      <header>
+        <h3
+        // contentEditable="true"
+        // suppressContentEditableWarning={true}
+        // spellCheck="false"
+        >
+          {title}
+        </h3>
+        <Icon icon={faExpandArrowsAlt} {...attributes} {...listeners} />
+      </header>
       <ul>
         {Array.from({ length: Number(id) }, (_task) => {
           return <Task text="Tarea por completar" />;
         })}
       </ul>
-      <Icon icon={faEye} />
     </TaskCardComponent>
   );
 };

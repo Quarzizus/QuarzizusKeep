@@ -8,7 +8,7 @@ const Task = ({ text }: { text: string }) => {
     // suppressContentEditableWarning={true}
     // spellCheck="false"
     >
-      {/* <CheckBox /> */}
+      <CheckBox />
       {text}
     </TaskComponent>
   );

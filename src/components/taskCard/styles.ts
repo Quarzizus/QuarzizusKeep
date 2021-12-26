@@ -10,6 +10,11 @@ const TaskCardComponent = styled.article`
   flex-direction: column;
   justify-content: space-between;
   margin: 20px 10px 10px 20px;
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
   h3 {
     height: 30px;
     display: flex;
@@ -25,6 +30,9 @@ const Icon = styled(FontAwesomeIcon)`
   cursor: pointer;
   &:hover {
     color: white;
+  }
+  &:focus {
+    outline: none;
   }
 `;
 
