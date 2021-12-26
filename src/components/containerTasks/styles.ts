@@ -6,7 +6,6 @@ const ContainerTasksComponent = styled.section`
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
   grid-auto-rows: 70px;
-  width: 80%;
   height: minmax(100vh, auto);
   gap: 20px;
   padding: 15px;
@@ -14,7 +13,7 @@ const ContainerTasksComponent = styled.section`
 `;
 
 const ContainerMasonry = styled(Masonry)`
-  width: 100%;
+  width: 75%;
   height: 100vh;
   display: flex;
   overflow-x: hidden;

@@ -17,7 +17,7 @@ const WrapperTask = styled.div<props>`
       position: absolute;
       top: 0;
       left: 0;
-      transition: 1s all ease;
+      /* transition: 1s all ease; */
     `}
   @media screen and (max-width: 600px) {
     padding: 0 25px;
@@ -85,6 +85,7 @@ const TaskCardComponent = styled.article<props>`
 const Icon = styled(FontAwesomeIcon)`
   color: transparent;
   cursor: pointer;
+  font-size: 25px;
   &:hover {
     color: white;
   }

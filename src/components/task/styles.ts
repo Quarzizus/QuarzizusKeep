@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const TaskComponent = styled.li`
   height: 40px;
@@ -16,4 +17,13 @@ const TaskComponent = styled.li`
   }
 `;
 
-export { TaskComponent };
+const Icon = styled(FontAwesomeIcon)`
+  margin-right: 10px;
+  color: transparent;
+  &:hover {
+    color: white;
+    cursor: pointer;
+  }
+`;
+
+export { TaskComponent, Icon };

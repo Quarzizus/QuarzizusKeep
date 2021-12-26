@@ -39,6 +39,7 @@ const TaskCard = ({ id, title }: { id: string; title: string }) => {
           >
             {title}
           </h3>
+
           {!open && (
             <Icon icon={faExpandArrowsAlt} {...attributes} {...listeners} />
           )}
