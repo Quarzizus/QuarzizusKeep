@@ -1,25 +1,23 @@
 import { TaskCard } from "../taskCard";
-import { Task } from "../task";
 import "./styles.css";
-import Masonry from "react-masonry-css";
 import { useState } from "react";
 import { DroppableProvider } from "./DroppableProvider";
-import { ContainerMasonry, ContainerTasksComponent } from "./styles";
+import { ContainerMasonry } from "./styles";
 
 const ContainerTasks = (): JSX.Element => {
   const [items, setItems] = useState([
-    "0",
-    "1",
-    "2",
-    "3",
-    "4",
-    "5",
-    "6",
-    "7",
-    "8",
+    "000",
+    "1000",
+    "2000",
+    "30",
+    "40",
+    "5000",
+    "600000",
+    "7000",
+    "800",
     "9",
     "10",
-    "11",
+    "110",
   ]);
 
   const breakpointColumnsObj = {
@@ -32,7 +30,7 @@ const ContainerTasks = (): JSX.Element => {
   return (
     <DroppableProvider items={items} setItems={setItems}>
       <ContainerMasonry className="WW" breakpointCols={breakpointColumnsObj}>
-        {items.map((numerito: string): JSX.Element => {
+        {items.map((numerito: string, i: number): JSX.Element => {
           return (
             <TaskCard
               key={numerito}

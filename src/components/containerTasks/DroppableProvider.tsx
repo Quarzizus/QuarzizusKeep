@@ -1,7 +1,6 @@
 import {
   closestCenter,
   DndContext,
-  DragEndEvent,
   KeyboardSensor,
   PointerSensor,
   useSensor,
@@ -16,9 +15,9 @@ import {
 import { SetStateAction } from "react";
 
 interface props {
-  children: JSX.Element;
+  children: JSX.Element | JSX.Element[];
   items: any[];
-  setItems: React.Dispatch<React.SetStateAction<any[]>>;
+  setItems: React.Dispatch<SetStateAction<any[]>>;
 }
 
 const DroppableProvider = ({ children, items, setItems }: props) => {
