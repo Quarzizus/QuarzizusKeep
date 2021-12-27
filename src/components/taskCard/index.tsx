@@ -25,7 +25,23 @@ import { restrictToVerticalAxis } from "@dnd-kit/modifiers";
 
 const TaskCard = ({ title, id }: { title: string; id: string }) => {
   const [open, setOpen] = useState(false);
-  const [items, setItems] = useState(["1", "2", "3"]);
+  const [items, setItems] = useState([
+    {
+      id: "0",
+      checked: false,
+      content: "Tareita 1",
+    },
+    {
+      id: "1",
+      checked: true,
+      content: "Bañarme",
+    },
+    {
+      id: "2",
+      checked: false,
+      content: "Acabar con este pinche proyecto",
+    },
+  ]);
   const { transform, transition, setNodeRef, attributes, listeners } =
     useSortable({
       id: id,
@@ -48,8 +64,8 @@ const TaskCard = ({ title, id }: { title: string; id: string }) => {
     const { active, over } = e;
     if (active.id !== over.id) {
       setItems((items: any[]) => {
-        const oldIndex = items.indexOf(active.id);
-        const newIndex = items.indexOf(over.id);
+        const oldIndex = items[active.id].id;
+        const newIndex = items[over.id].id;
         return arrayMove(items, oldIndex, newIndex);
       });
     }
@@ -83,16 +99,17 @@ const TaskCard = ({ title, id }: { title: string; id: string }) => {
         >
           <SortableContext items={items} strategy={verticalListSortingStrategy}>
             <ul>
-              {items.map((task: string, i: number): JSX.Element => {
-                return (
-                  <Task
-                    key={task}
-                    open={open}
-                    id={task}
-                    text={`Tarea por completar ${task}`}
-                  />
-                );
-              })}
+              {items.map(
+                ({
+                  id,
+                  content,
+                }: {
+                  id: string;
+                  content: string;
+                }): JSX.Element => {
+                  return <Task key={id} open={open} id={id} text={content} />;
+                }
+              )}
             </ul>
           </SortableContext>
         </DndContext>

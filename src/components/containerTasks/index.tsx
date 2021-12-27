@@ -5,20 +5,7 @@ import { DroppableProvider } from "./DroppableProvider";
 import { ContainerMasonry } from "./styles";
 
 const ContainerTasks = (): JSX.Element => {
-  const [items, setItems] = useState([
-    "000",
-    "1000",
-    "2000",
-    "30",
-    "40",
-    "5000",
-    "600000",
-    "7000",
-    "800",
-    "9",
-    "10",
-    "110",
-  ]);
+  const [items, setItems] = useState(["0", "1", "2", "3"]);
 
   const breakpointColumnsObj = {
     default: 4,
@@ -30,13 +17,9 @@ const ContainerTasks = (): JSX.Element => {
   return (
     <DroppableProvider items={items} setItems={setItems}>
       <ContainerMasonry className="WW" breakpointCols={breakpointColumnsObj}>
-        {items.map((numerito: string, i: number): JSX.Element => {
+        {items.map((element: string, i: number): JSX.Element => {
           return (
-            <TaskCard
-              key={numerito}
-              id={numerito}
-              title={`Title ${numerito}`}
-            />
+            <TaskCard key={element} id={element} title={`Title ${element}`} />
           );
         })}
       </ContainerMasonry>

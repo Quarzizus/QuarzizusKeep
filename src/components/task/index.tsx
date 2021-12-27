@@ -22,13 +22,8 @@ const Task = ({ text, open, id }: props) => {
   };
 
   return (
-    <TaskComponent
-      ref={setNodeRef}
-      style={style}
-      {...attributes}
-      {...listeners}
-    >
-      <Icon icon={faGripVertical} />
+    <TaskComponent ref={setNodeRef} style={style}>
+      <Icon icon={faGripVertical} {...attributes} {...listeners} />
       <CheckBox />
       <p
         contentEditable={open}
