@@ -22,7 +22,10 @@ const Icon = styled(FontAwesomeIcon)`
   color: transparent;
   &:hover {
     color: white;
-    cursor: pointer;
+    cursor: move;
+  }
+  &:focus {
+    outline: none;
   }
 `;
 

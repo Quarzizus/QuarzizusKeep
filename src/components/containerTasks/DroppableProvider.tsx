@@ -2,6 +2,7 @@ import {
   closestCenter,
   DndContext,
   KeyboardSensor,
+  Modifiers,
   PointerSensor,
   useSensor,
   useSensors,
@@ -15,12 +16,13 @@ import {
 import { SetStateAction } from "react";
 
 interface props {
-  children: JSX.Element | JSX.Element[];
+  children?: JSX.Element | JSX.Element[];
   items: any;
   setItems: React.Dispatch<SetStateAction<any>>;
+  modifiers?: Modifiers;
 }
 
-const DroppableProvider = ({ children, items, setItems }: props) => {
+const DroppableProvider = ({ children, items, setItems, modifiers }: props) => {
   const sensors = useSensors(
     useSensor(PointerSensor),
     useSensor(KeyboardSensor, {
@@ -42,6 +44,7 @@ const DroppableProvider = ({ children, items, setItems }: props) => {
       sensors={sensors}
       collisionDetection={closestCenter}
       onDragEnd={handleDragEnd}
+      modifiers={modifiers}
     >
       <SortableContext items={items} strategy={verticalListSortingStrategy}>
         {children}

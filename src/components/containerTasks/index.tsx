@@ -14,7 +14,6 @@ const ContainerTasks = (): JSX.Element => {
     930: 2,
     700: 1,
   };
-
   return (
     <DroppableProvider items={items} setItems={setItems}>
       <ContainerMasonry className="WW" breakpointCols={breakpointColumnsObj}>

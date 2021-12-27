@@ -42,6 +42,9 @@ const TaskCardComponent = styled.article<props>`
           margin: 20px 10px 10px 20px;
           max-height: 200px;
           overflow: hidden;
+          &:hover {
+            box-shadow: -1px 0px 21px -9px #ffffff;
+          }
         `}
 
   header {
@@ -84,7 +87,7 @@ const TaskCardComponent = styled.article<props>`
 
 const Icon = styled(FontAwesomeIcon)`
   color: transparent;
-  cursor: pointer;
+  cursor: move;
   font-size: 25px;
   &:hover {
     color: white;
