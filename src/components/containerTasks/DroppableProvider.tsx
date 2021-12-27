@@ -16,8 +16,8 @@ import { SetStateAction } from "react";
 
 interface props {
   children: JSX.Element | JSX.Element[];
-  items: any[];
-  setItems: React.Dispatch<SetStateAction<any[]>>;
+  items: any;
+  setItems: React.Dispatch<SetStateAction<any>>;
 }
 
 const DroppableProvider = ({ children, items, setItems }: props) => {
@@ -31,8 +31,8 @@ const DroppableProvider = ({ children, items, setItems }: props) => {
     const { active, over } = e;
     if (active.id !== over.id) {
       setItems((items: any[]) => {
-        const oldIndex = items.indexOf(active.id);
-        const newIndex = items.indexOf(over.id);
+        const oldIndex = items[active.id].id;
+        const newIndex = items[over.id].id;
         return arrayMove(items, oldIndex, newIndex);
       });
     }

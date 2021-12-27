@@ -14,34 +14,24 @@ import { DroppableProvider } from "../containerTasks/DroppableProvider";
 import {
   closestCenter,
   DndContext,
-  DragOverlay,
   KeyboardSensor,
   PointerSensor,
-  useDroppable,
   useSensor,
   useSensors,
 } from "@dnd-kit/core";
 import { restrictToVerticalAxis } from "@dnd-kit/modifiers";
 
-const TaskCard = ({ title, id }: { title: string; id: string }) => {
+const TaskCard = ({
+  title,
+  id,
+  tasks,
+}: {
+  title: string;
+  id: string;
+  tasks: any;
+}) => {
   const [open, setOpen] = useState(false);
-  const [items, setItems] = useState([
-    {
-      id: "0",
-      checked: false,
-      content: "Tareita 1",
-    },
-    {
-      id: "1",
-      checked: true,
-      content: "Bañarme",
-    },
-    {
-      id: "2",
-      checked: false,
-      content: "Acabar con este pinche proyecto",
-    },
-  ]);
+  const [items, setItems] = useState(tasks);
   const { transform, transition, setNodeRef, attributes, listeners } =
     useSortable({
       id: id,
@@ -60,12 +50,17 @@ const TaskCard = ({ title, id }: { title: string; id: string }) => {
       coordinateGetter: sortableKeyboardCoordinates,
     })
   );
+
   const handleDragEnd = (e: any) => {
     const { active, over } = e;
     if (active.id !== over.id) {
+      if (!over) return;
+      if (active.id === over.id) return;
+
       setItems((items: any[]) => {
         const oldIndex = items[active.id].id;
         const newIndex = items[over.id].id;
+        console.log(oldIndex, newIndex);
         return arrayMove(items, oldIndex, newIndex);
       });
     }
@@ -86,7 +81,6 @@ const TaskCard = ({ title, id }: { title: string; id: string }) => {
           >
             {title}
           </h3>
-
           {!open && (
             <Icon icon={faExpandArrowsAlt} {...listeners} {...attributes} />
           )}
@@ -97,7 +91,7 @@ const TaskCard = ({ title, id }: { title: string; id: string }) => {
           onDragEnd={handleDragEnd}
           modifiers={[restrictToVerticalAxis]}
         >
-          <SortableContext items={items} strategy={verticalListSortingStrategy}>
+          <SortableContext items={items}>
             <ul>
               {items.map(
                 ({
@@ -107,7 +101,7 @@ const TaskCard = ({ title, id }: { title: string; id: string }) => {
                   id: string;
                   content: string;
                 }): JSX.Element => {
-                  return <Task key={id} open={open} id={id} text={content} />;
+                  return <Task key={id} id={id} text={content} open={open} />;
                 }
               )}
             </ul>
