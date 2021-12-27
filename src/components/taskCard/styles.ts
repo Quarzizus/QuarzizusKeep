@@ -36,7 +36,7 @@ const TaskCardComponent = styled.article<props>`
   ${({ open }) =>
     open
       ? css`
-          width: 40%;
+          width: 580px;
         `
       : css`
           margin: 20px 10px 10px 20px;
