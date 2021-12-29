@@ -1,13 +1,16 @@
 import { NavLink } from "react-router-dom";
+import { Form } from "../../components/form";
+import { LoginContainer } from "./styles";
+import LoginImage from "../../images/login.jpg";
 
 const Login = () => {
   return (
-    <>
-      <h2>Login</h2>
-      <NavLink to="/home">
-        <button>Home</button>
-      </NavLink>
-    </>
+    <LoginContainer>
+      <Form />
+      <picture>
+        <img src={LoginImage} alt="bosque" />
+      </picture>
+    </LoginContainer>
   );
 };
 
