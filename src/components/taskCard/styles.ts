@@ -25,7 +25,7 @@ const WrapperTask = styled.div<props>`
 `;
 
 const TaskCardComponent = styled.article<props>`
-  background-color: yellowgreen;
+  background-color: #16504b;
   border-radius: 10px;
   padding: 15px 20px;
   color: #fff;
@@ -40,7 +40,7 @@ const TaskCardComponent = styled.article<props>`
         `
       : css`
           margin: 20px 10px 10px 20px;
-          max-height: 200px;
+          max-height: 250px;
           overflow: hidden;
           &:hover {
             box-shadow: -1px 0px 21px -9px #ffffff;
