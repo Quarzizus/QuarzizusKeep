@@ -13,7 +13,9 @@ const ButtonWithMode = ({ credentials }: { credentials: Credentials }) => {
 
   return (
     <>
-      <p onClick={() => setButtonMode(!buttonMode)}>{mode.message}</p>
+      <p className="underline" onClick={() => setButtonMode(!buttonMode)}>
+        {mode.message}
+      </p>
       <ButtonLogin
         type="button"
         onClick={() => {

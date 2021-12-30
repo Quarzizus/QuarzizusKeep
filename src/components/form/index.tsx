@@ -71,18 +71,12 @@ const Form = () => {
         </div>
       </InputContainer>
       <ButtonWithMode credentials={credentials} />
+      <div>
+        <p>Error</p>
+      </div>
       <LoginAlternatives>
         <p>Log in with</p>
-        <button
-          onClick={async (e) => {
-            try {
-              await handleSubmitWithGoogle({ e, auth, navigate });
-              navigate("/home");
-            } catch (error) {
-              console.log(error);
-            }
-          }}
-        >
+        <button onClick={(e) => handleSubmitWithGoogle({ e, auth, navigate })}>
           <img src={GoogleIcon} alt="google" />
         </button>
       </LoginAlternatives>

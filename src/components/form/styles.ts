@@ -13,6 +13,10 @@ const FormComponent = styled.form`
   height: 100vh;
   width: 40%;
   min-width: 500px;
+  p.underline {
+    text-decoration: underline;
+    cursor: pointer;
+  }
 `;
 
 const Header = styled.header`
