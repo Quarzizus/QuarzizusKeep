@@ -12,6 +12,7 @@ const FormComponent = styled.form`
   color: white;
   height: 100vh;
   width: 40%;
+  min-width: 500px;
 `;
 
 const Header = styled.header`
@@ -87,6 +88,10 @@ const LoginAlternatives = styled.section`
   }
   img {
     cursor: pointer;
+  }
+  button {
+    border: none;
+    background-color: transparent;
   }
 `;
 
