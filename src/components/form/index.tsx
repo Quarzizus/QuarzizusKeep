@@ -12,6 +12,8 @@ import { faEye } from "@fortawesome/free-solid-svg-icons";
 import { Credentials } from "./interfaces";
 import { handleSubmitWithGoogle } from "./utils";
 import { ButtonWithMode } from "./ButtonWithMode";
+import { getAuth } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
 
 const Form = () => {
   const [credentials, setCredentials] = useState<Credentials>({
@@ -20,6 +22,8 @@ const Form = () => {
   });
   const [viewPassword, setViewPassword] = useState(false);
   const typeInputPassword = viewPassword ? "text" : "password";
+  const auth = getAuth();
+  const navigate = useNavigate();
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setCredentials({
@@ -69,7 +73,16 @@ const Form = () => {
       <ButtonWithMode credentials={credentials} />
       <LoginAlternatives>
         <p>Log in with</p>
-        <button onClick={() => {}}>
+        <button
+          onClick={async (e) => {
+            try {
+              await handleSubmitWithGoogle({ e, auth, navigate });
+              navigate("/home");
+            } catch (error) {
+              console.log(error);
+            }
+          }}
+        >
           <img src={GoogleIcon} alt="google" />
         </button>
       </LoginAlternatives>

@@ -6,50 +6,67 @@ import {
   signInWithPopup,
 } from "firebase/auth";
 import { MouseEvent } from "react";
+import { NavigateFunction } from "react-router-dom";
 import { Credentials } from "./interfaces";
+
 const GoogleProvider = new GoogleAuthProvider();
 
 const handleSignInUser = async ({
   credentials,
   auth,
+  navigate,
 }: {
   credentials: Credentials;
   auth: Auth;
+  navigate: NavigateFunction;
 }) => {
-  const userCredentials = await signInWithEmailAndPassword(
-    auth,
-    credentials.email,
-    credentials.password
-  );
-  console.log(userCredentials);
+  try {
+    const userCredentials = await signInWithEmailAndPassword(
+      auth,
+      credentials.email,
+      credentials.password
+    );
+    console.log(userCredentials);
+    navigate("/home");
+  } catch (error) {
+    console.log(error);
+  }
 };
-
 const handleRegisterUser = async ({
   credentials,
   auth,
+  navigate,
 }: {
   credentials: Credentials;
   auth: Auth;
+  navigate: NavigateFunction;
 }) => {
-  const userCredentials = await createUserWithEmailAndPassword(
-    auth,
-    credentials.email,
-    credentials.password
-  );
-  console.log(userCredentials);
+  try {
+    const userCredentials = await createUserWithEmailAndPassword(
+      auth,
+      credentials.email,
+      credentials.password
+    );
+    console.log(userCredentials);
+    navigate("/home");
+  } catch (error) {
+    console.log(error);
+  }
 };
-
 const handleSubmitWithGoogle = async ({
   e,
   auth,
+  navigate,
 }: {
   e: MouseEvent;
   auth: Auth;
+  navigate: NavigateFunction;
 }) => {
   e.preventDefault();
   try {
     const result = await signInWithPopup(auth, GoogleProvider);
     const user = result.user;
+    navigate("/home");
   } catch (error) {
     console.log(error);
   }
