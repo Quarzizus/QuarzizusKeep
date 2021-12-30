@@ -6,15 +6,10 @@ import { Task } from "../task";
 import { useState } from "react";
 import { DroppableProvider } from "../containerTasks/DroppableProvider";
 import { restrictToVerticalAxis } from "@dnd-kit/modifiers";
-const TaskCard = ({
-  title,
-  id,
-  tasks,
-}: {
-  title: string;
-  id: string;
-  tasks: any;
-}) => {
+import { props } from "./interfaces";
+import { props as TaskProps } from "../task/interfaces";
+
+const TaskCard = ({ title, id, tasks }: props) => {
   const [open, setOpen] = useState(false);
   const [items, setItems] = useState(tasks);
   const { transform, transition, setNodeRef, attributes, listeners } =
@@ -55,17 +50,9 @@ const TaskCard = ({
           modifiers={[restrictToVerticalAxis]}
         >
           <ul>
-            {items.map(
-              ({
-                id,
-                content,
-              }: {
-                id: string;
-                content: string;
-              }): JSX.Element => {
-                return <Task key={id} id={id} text={content} open={open} />;
-              }
-            )}
+            {items.map(({ id, content }: TaskProps): JSX.Element => {
+              return <Task key={id} id={id} content={content} open={open} />;
+            })}
           </ul>
         </DroppableProvider>
         {open && (

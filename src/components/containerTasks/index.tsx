@@ -4,6 +4,7 @@ import { useState } from "react";
 import { DroppableProvider } from "./DroppableProvider";
 import { ContainerMasonry } from "./styles";
 import { user } from "../../db";
+import { props as TaskCardProps } from "../taskCard/interfaces";
 
 const ContainerTasks = (): JSX.Element => {
   const [items, setItems] = useState(user.taskCards);
@@ -17,19 +18,9 @@ const ContainerTasks = (): JSX.Element => {
   return (
     <DroppableProvider items={items} setItems={setItems}>
       <ContainerMasonry className="WW" breakpointCols={breakpointColumnsObj}>
-        {items.map(
-          ({
-            id,
-            tasks,
-            title,
-          }: {
-            id: string;
-            tasks: any;
-            title: string;
-          }): JSX.Element => {
-            return <TaskCard key={id} id={id} title={title} tasks={tasks} />;
-          }
-        )}
+        {items.map(({ id, tasks, title }: TaskCardProps): JSX.Element => {
+          return <TaskCard key={id} id={id} title={title} tasks={tasks} />;
+        })}
       </ContainerMasonry>
     </DroppableProvider>
   );
