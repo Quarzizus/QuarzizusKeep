@@ -1,11 +1,16 @@
-import { useState } from "react";
-import { ButtonLogin } from "./styles";
-import { Credentials } from "./interfaces";
+import { Dispatch, SetStateAction, useState } from "react";
+import { ButtonLogin } from "../styles";
+import { Credentials } from "../interfaces";
 import { getAuth } from "firebase/auth";
-import { register, signin } from "./utils";
+import { register, signin } from "../utils/handles";
 import { useNavigate } from "react-router-dom";
 
-const ButtonWithMode = ({ credentials }: { credentials: Credentials }) => {
+interface props {
+  credentials: Credentials;
+  setError: Dispatch<SetStateAction<string>>;
+}
+
+const ButtonWithMode = ({ credentials, setError }: props) => {
   const auth = getAuth();
   const navigate = useNavigate();
   const [buttonMode, setButtonMode] = useState(true);
@@ -18,9 +23,7 @@ const ButtonWithMode = ({ credentials }: { credentials: Credentials }) => {
       </p>
       <ButtonLogin
         type="button"
-        onClick={() => {
-          mode.onClick({ credentials, auth, navigate });
-        }}
+        onClick={() => mode.onClick({ credentials, auth, navigate, setError })}
       >
         {mode.button}
       </ButtonLogin>

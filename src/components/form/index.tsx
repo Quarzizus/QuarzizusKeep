@@ -5,25 +5,23 @@ import {
   Input,
   LoginAlternatives,
 } from "./styles";
-import GoogleIcon from "../../images/google-icon.svg";
 import { ChangeEvent, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
 import { Credentials } from "./interfaces";
-import { handleSubmitWithGoogle } from "./utils";
-import { ButtonWithMode } from "./ButtonWithMode";
-import { getAuth } from "firebase/auth";
-import { useNavigate } from "react-router-dom";
+import { handleSubmitWithGoogle } from "./utils/handles";
+import { ButtonWithMode } from "./hocs/ButtonWithMode";
+import { LoginAlternative } from "./hocs/LoginAlternative";
+import { FirebaseError } from "firebase/app";
 
 const Form = () => {
   const [credentials, setCredentials] = useState<Credentials>({
     email: "",
     password: "",
   });
+  const [error, setError] = useState<any>(null);
   const [viewPassword, setViewPassword] = useState(false);
   const typeInputPassword = viewPassword ? "text" : "password";
-  const auth = getAuth();
-  const navigate = useNavigate();
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setCredentials({
@@ -70,15 +68,12 @@ const Form = () => {
           </button>
         </div>
       </InputContainer>
-      <ButtonWithMode credentials={credentials} />
+      <ButtonWithMode credentials={credentials} setError={setError} />
       <div>
-        <p>Error</p>
+        <p>{error}</p>
       </div>
       <LoginAlternatives>
-        <p>Log in with</p>
-        <button onClick={(e) => handleSubmitWithGoogle({ e, auth, navigate })}>
-          <img src={GoogleIcon} alt="google" />
-        </button>
+        <LoginAlternative handle={handleSubmitWithGoogle} setError={setError} />
       </LoginAlternatives>
     </FormComponent>
   );
