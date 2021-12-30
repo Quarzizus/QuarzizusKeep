@@ -3,19 +3,15 @@ import {
   Header,
   InputContainer,
   Input,
-  ButtonLogin,
   LoginAlternatives,
 } from "./styles";
 import GoogleIcon from "../../images/google-icon.svg";
-import { ChangeEvent, MouseEvent, useState } from "react";
+import { ChangeEvent, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
-import { GoogleAuthProvider, getAuth, signInWithPopup } from "firebase/auth";
-
-interface Credentials {
-  email: string;
-  password: string | number;
-}
+import { Credentials } from "./interfaces";
+import { handleSubmitWithGoogle } from "./utils";
+import { ButtonWithMode } from "./ButtonWithMode";
 
 const Form = () => {
   const [credentials, setCredentials] = useState<Credentials>({
@@ -24,25 +20,13 @@ const Form = () => {
   });
   const [viewPassword, setViewPassword] = useState(false);
   const typeInputPassword = viewPassword ? "text" : "password";
-  const GoogleProvider = new GoogleAuthProvider();
-  const auth = getAuth();
+
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setCredentials({
       ...credentials,
       [e.target.name]: e.target.value,
     });
   };
-  const handleSubmit = async (e: MouseEvent) => {
-    e.preventDefault();
-    try {
-      const result = await signInWithPopup(auth, GoogleProvider);
-      const user = result.user;
-      console.log(user);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   return (
     <FormComponent>
       <Header>
@@ -82,10 +66,10 @@ const Form = () => {
           </button>
         </div>
       </InputContainer>
-      <ButtonLogin type="button">Log in</ButtonLogin>
+      <ButtonWithMode credentials={credentials} />
       <LoginAlternatives>
         <p>Log in with</p>
-        <button onClick={handleSubmit}>
+        <button onClick={() => {}}>
           <img src={GoogleIcon} alt="google" />
         </button>
       </LoginAlternatives>
