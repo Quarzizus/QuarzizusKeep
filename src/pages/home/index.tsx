@@ -1,4 +1,4 @@
-// import { Sidebar } from "../../components/sidebar";
+import { Sidebar } from "../../components/sidebar";
 import { Spinner } from "../../components/spinner";
 import { ContainerTasks } from "../../components/containerTasks";
 import { getDatabase, ref, child, get } from "firebase/database";
@@ -36,7 +36,7 @@ const Home = () => {
 
   return (
     <>
-      {/* <Sidebar /> */}
+      <Sidebar />
       {loading && <Spinner />}
       {userData.taskCards.length && !loading && (
         <ContainerTasks data={userData} loading={loading} />

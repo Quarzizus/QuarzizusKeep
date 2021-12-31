@@ -5,8 +5,9 @@ import {
   signInWithEmailAndPassword,
   signInWithPopup,
 } from "firebase/auth";
-import { createContext, useState } from "react";
+import { createContext, useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { AppContext } from "../../../context/AppContext";
 import { Credentials, FormContextProps } from "../interfaces";
 const FormContext = createContext({} as FormContextProps);
 const { Provider } = FormContext;
@@ -16,6 +17,8 @@ interface FormProviderProps {
 }
 
 const FormProvider = ({ children }: FormProviderProps) => {
+  const { setUserId } = useContext(AppContext);
+
   const [error, setError] = useState<any>(null);
   const GoogleProvider = new GoogleAuthProvider();
   const auth = getAuth();
@@ -32,8 +35,9 @@ const FormProvider = ({ children }: FormProviderProps) => {
       credentials.password
     )
       .then((userCredentials) => {
-        console.log(userCredentials);
-        navigate("/home");
+        const userId = userCredentials.user.uid;
+        setUserId(userId);
+        return navigate("/home");
       })
       .catch((error) => {
         setError(error.code);
@@ -50,7 +54,7 @@ const FormProvider = ({ children }: FormProviderProps) => {
       credentials.password
     )
       .then((userCredentials) => {
-        console.log(userCredentials);
+        setUserId(userCredentials.user.uid);
         navigate("/home");
       })
       .catch((error) => {
@@ -62,6 +66,7 @@ const FormProvider = ({ children }: FormProviderProps) => {
     await signInWithPopup(auth, GoogleProvider)
       .then((result) => {
         const user = result.user;
+        setUserId(user.uid);
         navigate("/home");
       })
       .catch((error) => {
