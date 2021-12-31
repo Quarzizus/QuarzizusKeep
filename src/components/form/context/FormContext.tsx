@@ -9,9 +9,13 @@ import { createContext, useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AppContext } from "../../../context/AppContext";
 import { Credentials, FormContextProps } from "../interfaces";
+import { getDatabase } from "firebase/database";
+import { createInitialData } from "../utils/createInitialData";
+import { user } from "../../../db";
+import { setLocalStorage } from "../utils/setLocalStorage";
+
 const FormContext = createContext({} as FormContextProps);
 const { Provider } = FormContext;
-
 interface FormProviderProps {
   children: JSX.Element | JSX.Element[];
 }
@@ -22,6 +26,7 @@ const FormProvider = ({ children }: FormProviderProps) => {
   const [error, setError] = useState<any>(null);
   const GoogleProvider = new GoogleAuthProvider();
   const auth = getAuth();
+  const db = getDatabase();
   const navigate = useNavigate();
 
   const handleSignInUser = async ({
@@ -37,6 +42,7 @@ const FormProvider = ({ children }: FormProviderProps) => {
       .then((userCredentials) => {
         const userId = userCredentials.user.uid;
         setUserId(userId);
+        setLocalStorage("userId", userId);
         return navigate("/home");
       })
       .catch((error) => {
@@ -54,7 +60,11 @@ const FormProvider = ({ children }: FormProviderProps) => {
       credentials.password
     )
       .then((userCredentials) => {
-        setUserId(userCredentials.user.uid);
+        const userId = userCredentials.user.uid;
+        setUserId(userId);
+        createInitialData(db, user, userId);
+        setLocalStorage("userId", userId);
+
         navigate("/home");
       })
       .catch((error) => {
@@ -67,6 +77,7 @@ const FormProvider = ({ children }: FormProviderProps) => {
       .then((result) => {
         const user = result.user;
         setUserId(user.uid);
+        setLocalStorage("userId", user.uid);
         navigate("/home");
       })
       .catch((error) => {

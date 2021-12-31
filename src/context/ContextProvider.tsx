@@ -6,8 +6,14 @@ interface ContextProviderProps {
 }
 
 const ContextProvider = ({ children }: ContextProviderProps) => {
-  const [userId, setUserId] = useState("0000");
-  console.log(userId);
+  const [userId, setUserId] = useState(() => {
+    try {
+      const uid = localStorage.getItem("userId");
+      return uid !== null ? JSON.parse(uid) : "";
+    } catch (error) {
+      return "";
+    }
+  });
   const value = {
     userId,
     setUserId,

@@ -11,13 +11,7 @@ interface props {
   taskCards: TaskCardProps[];
 }
 
-const ContainerTasks = ({
-  data,
-  loading,
-}: {
-  data: props;
-  loading: boolean;
-}): JSX.Element => {
+const ContainerTasks = ({ data }: { data: props }): JSX.Element => {
   const [items, setItems] = useState(data);
 
   const breakpointColumnsObj = {
