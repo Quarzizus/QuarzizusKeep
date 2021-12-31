@@ -6,4 +6,19 @@ interface Credentials {
 }
 type setError = Dispatch<SetStateAction<any>>;
 
-export type { Credentials, setError };
+interface FormContextProps {
+  register: {
+    message: string;
+    button: string;
+    onClick: ({ credentials }: { credentials: Credentials }) => Promise<void>;
+  };
+  signin: {
+    message: string;
+    button: string;
+    onClick: ({ credentials }: { credentials: Credentials }) => Promise<void>;
+  };
+  error: any;
+  handleSubmitWithGoogle: ({ e }: { e: MouseEvent }) => Promise<void>;
+}
+
+export type { Credentials, setError, FormContextProps };

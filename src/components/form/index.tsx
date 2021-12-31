@@ -5,21 +5,20 @@ import {
   Input,
   LoginAlternatives,
 } from "./styles";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useContext, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
 import { Credentials } from "./interfaces";
-import { handleSubmitWithGoogle } from "./utils/handles";
 import { ButtonWithMode } from "./hocs/ButtonWithMode";
 import { LoginAlternative } from "./hocs/LoginAlternative";
-import { FirebaseError } from "firebase/app";
+import { FormContext } from "./context/FormContext";
 
 const Form = () => {
   const [credentials, setCredentials] = useState<Credentials>({
     email: "",
     password: "",
   });
-  const [error, setError] = useState<any>(null);
+  const { handleSubmitWithGoogle, error } = useContext(FormContext);
   const [viewPassword, setViewPassword] = useState(false);
   const typeInputPassword = viewPassword ? "text" : "password";
 
@@ -68,12 +67,12 @@ const Form = () => {
           </button>
         </div>
       </InputContainer>
-      <ButtonWithMode credentials={credentials} setError={setError} />
+      <ButtonWithMode credentials={credentials} />
       <div>
         <p>{error}</p>
       </div>
       <LoginAlternatives>
-        <LoginAlternative handle={handleSubmitWithGoogle} setError={setError} />
+        <LoginAlternative handle={handleSubmitWithGoogle} />
       </LoginAlternatives>
     </FormComponent>
   );
