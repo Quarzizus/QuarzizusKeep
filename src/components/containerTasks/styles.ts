@@ -10,9 +10,9 @@ const ContainerTasksComponent = styled.section`
 `;
 
 const ContainerMasonry = styled(Masonry)`
-  background-color: #202124;
+  background-color: rgba(12, 18, 12);
   padding: 15px;
-  width: 75%;
+  width: 100%;
   height: 100vh;
   display: flex;
   overflow-x: hidden;

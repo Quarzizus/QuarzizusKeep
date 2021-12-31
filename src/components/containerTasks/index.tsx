@@ -3,11 +3,22 @@ import "./styles.css";
 import { useState } from "react";
 import { DroppableProvider } from "./DroppableProvider";
 import { ContainerMasonry } from "./styles";
-import { user } from "../../db";
 import { props as TaskCardProps } from "../taskCard/interfaces";
 
-const ContainerTasks = (): JSX.Element => {
-  const [items, setItems] = useState(user.taskCards);
+interface props {
+  email: string;
+  userId: string;
+  taskCards: TaskCardProps[];
+}
+
+const ContainerTasks = ({
+  data,
+  loading,
+}: {
+  data: props;
+  loading: boolean;
+}): JSX.Element => {
+  const [items, setItems] = useState(data);
 
   const breakpointColumnsObj = {
     default: 4,
@@ -16,13 +27,17 @@ const ContainerTasks = (): JSX.Element => {
     700: 1,
   };
   return (
-    <DroppableProvider items={items} setItems={setItems}>
-      <ContainerMasonry className="WW" breakpointCols={breakpointColumnsObj}>
-        {items.map(({ id, tasks, title }: TaskCardProps): JSX.Element => {
-          return <TaskCard key={id} id={id} title={title} tasks={tasks} />;
-        })}
-      </ContainerMasonry>
-    </DroppableProvider>
+    <>
+      <DroppableProvider items={items.taskCards} setItems={setItems}>
+        <ContainerMasonry className="WW" breakpointCols={breakpointColumnsObj}>
+          {items.taskCards.map(
+            ({ id, tasks, title }: TaskCardProps): JSX.Element => {
+              return <TaskCard key={id} id={id} title={title} tasks={tasks} />;
+            }
+          )}
+        </ContainerMasonry>
+      </DroppableProvider>
+    </>
   );
 };
 

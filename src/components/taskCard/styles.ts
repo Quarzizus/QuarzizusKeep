@@ -25,7 +25,8 @@ const WrapperTask = styled.div<props>`
 `;
 
 const TaskCardComponent = styled.article<props>`
-  background-color: #16504b;
+  background-color: black;
+  cursor: pointer;
   border-radius: 10px;
   padding: 15px 20px;
   color: #fff;
@@ -33,6 +34,7 @@ const TaskCardComponent = styled.article<props>`
   flex-direction: column;
   justify-content: space-between;
   transition: 0.5s ease all;
+  border: 2px solid rgba(98, 195, 112, 0.5);
   ${({ open }) =>
     open
       ? css`
@@ -43,7 +45,7 @@ const TaskCardComponent = styled.article<props>`
           max-height: 250px;
           overflow: hidden;
           &:hover {
-            box-shadow: -1px 0px 21px -9px #ffffff;
+            border: 2px solid rgba(98, 195, 112);
           }
         `}
 
