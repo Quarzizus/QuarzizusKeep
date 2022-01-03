@@ -11,7 +11,7 @@ import { AppContext } from "../../../context/AppContext";
 import { Credentials, FormContextProps } from "../interfaces";
 import { getDatabase } from "firebase/database";
 import { createInitialData } from "../utils/createInitialData";
-import { user } from "../../../db";
+import { user as userInitialData } from "../../../db";
 import { setLocalStorage } from "../utils/setLocalStorage";
 
 const FormContext = createContext({} as FormContextProps);
@@ -62,7 +62,7 @@ const FormProvider = ({ children }: FormProviderProps) => {
       .then((userCredentials) => {
         const userId = userCredentials.user.uid;
         setUserId(userId);
-        createInitialData(db, user, userId);
+        createInitialData(db, userInitialData, userId);
         setLocalStorage("userId", userId);
 
         navigate("/home");
@@ -78,6 +78,7 @@ const FormProvider = ({ children }: FormProviderProps) => {
         const user = result.user;
         setUserId(user.uid);
         setLocalStorage("userId", user.uid);
+        createInitialData(db, userInitialData, user.uid);
         navigate("/home");
       })
       .catch((error) => {
@@ -94,7 +95,6 @@ const FormProvider = ({ children }: FormProviderProps) => {
     button: "Sign In",
     onClick: handleSignInUser,
   };
-
   const value = {
     register,
     signin,

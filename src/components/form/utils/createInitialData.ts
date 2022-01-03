@@ -1,4 +1,4 @@
-import { Database, ref, set } from "firebase/database";
+import { Database, ref, set, child, get } from "firebase/database";
 import { props as TaskCardsProps } from "../../taskCard/interfaces";
 
 interface initialData {
@@ -8,7 +8,9 @@ interface initialData {
 }
 
 const createInitialData = (db: Database, data: initialData, userId: string) => {
-  set(ref(db, userId), data);
+  get(child(ref(db), userId)).then((snapshot) => {
+    !snapshot.exists() && set(ref(db, userId), data);
+  });
 };
 
 export { createInitialData };
