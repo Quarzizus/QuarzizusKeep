@@ -6,6 +6,8 @@ import { useContext, useEffect, useState } from "react";
 import { props as TaskCardProps } from "../../components/taskCard/interfaces";
 import { user } from "../../db/index";
 import { AppContext } from "../../context/AppContext";
+import { CreateTaskCard } from "../../components/createTaskCard";
+import { HomePage } from "./styles";
 interface UserData {
   email: string;
   userId: string;
@@ -39,9 +41,12 @@ const Home = () => {
   return (
     <>
       <Sidebar />
-      {!userId && <h2>No hay userID</h2>}
-      {loading && <Spinner />}
-      {userId && !loading && <ContainerTasks data={userData} />}
+      <HomePage>
+        <CreateTaskCard />
+        {!userId && <h2>No hay userID</h2>}
+        {loading && <Spinner />}
+        {userId && !loading && <ContainerTasks data={userData} />}
+      </HomePage>
     </>
   );
 };

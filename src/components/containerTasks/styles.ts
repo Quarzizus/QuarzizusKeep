@@ -12,11 +12,13 @@ const ContainerTasksComponent = styled.section`
 const ContainerMasonry = styled(Masonry)`
   background-color: rgba(12, 18, 12);
   padding: 15px;
+  height: 100%;
   width: 100%;
-  height: 100vh;
   display: flex;
   overflow-x: hidden;
   overflow-y: scroll;
+  grid-column: 1/-1;
+  grid-row: 2/3;
 `;
 
 export { ContainerTasksComponent, ContainerMasonry };

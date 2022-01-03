@@ -2,23 +2,26 @@ import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const TaskComponent = styled.li`
-  height: 40px;
+  min-height: 40px;
   display: flex;
-  align-items: center;
-
+  align-items: start;
+  width: 100%;
   p {
-    width: 100%;
+    width: 90%;
+    overflow-wrap: break-word;
+    word-break: break-all;
   }
   & p:focus {
     outline: none;
     border-bottom: 1px solid white;
     font-weight: bold;
-    caret-color: black;
+    caret-color: white;
   }
 `;
 
 const Icon = styled(FontAwesomeIcon)`
   margin-right: 10px;
+  margin-top: 1px;
   color: transparent;
   &:hover {
     color: white;
