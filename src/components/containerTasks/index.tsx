@@ -1,18 +1,19 @@
 import { TaskCard } from "../taskCard";
 import "./styles.css";
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { DroppableProvider } from "./DroppableProvider";
 import { ContainerMasonry } from "./styles";
 import { props as TaskCardProps } from "../taskCard/interfaces";
+import { AppContext } from "../../context/AppContext";
 
-interface props {
-  email: string;
-  userId: string;
-  taskCards: TaskCardProps[];
-}
+// interface props {
+//   email: string;
+//   userId: string;
+//   taskCards: TaskCardProps[];
+// }
 
-const ContainerTasks = ({ data }: { data: props }): JSX.Element => {
-  const [items, setItems] = useState(data);
+const ContainerTasks = (): JSX.Element => {
+  const { userData, setUserData } = useContext(AppContext);
 
   const breakpointColumnsObj = {
     default: 4,
@@ -22,9 +23,9 @@ const ContainerTasks = ({ data }: { data: props }): JSX.Element => {
   };
   return (
     <>
-      <DroppableProvider items={items.taskCards} setItems={setItems}>
+      <DroppableProvider items={userData.taskCards}>
         <ContainerMasonry className="WW" breakpointCols={breakpointColumnsObj}>
-          {items.taskCards.map(
+          {userData.taskCards.map(
             ({ id, tasks, title }: TaskCardProps): JSX.Element => {
               return <TaskCard key={id} id={id} title={title} tasks={tasks} />;
             }

@@ -1,5 +1,5 @@
 const user = {
-  userId: "0",
+  userId: "",
   email: "",
   taskCards: [
     {
@@ -9,6 +9,7 @@ const user = {
           id: "0",
           checked: false,
           content: "You can add here yours tasks",
+          open: false,
         },
       ],
       title: "Welcome",

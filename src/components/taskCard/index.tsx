@@ -3,15 +3,16 @@ import { faExpandArrowsAlt } from "@fortawesome/free-solid-svg-icons";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import { Task } from "../task";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { DroppableProvider } from "../containerTasks/DroppableProvider";
 import { restrictToVerticalAxis } from "@dnd-kit/modifiers";
 import { props } from "./interfaces";
 import { props as TaskProps } from "../task/interfaces";
+import { CreateTask } from "../createTask";
 
 const TaskCard = ({ title, id, tasks }: props) => {
   const [open, setOpen] = useState(false);
-  const [items, setItems] = useState(tasks);
+  const createTaskRef = useRef<HTMLParagraphElement>(null);
   const { transform, transition, setNodeRef, attributes, listeners } =
     useSortable({
       id: id,
@@ -45,14 +46,22 @@ const TaskCard = ({ title, id, tasks }: props) => {
           )}
         </header>
         <DroppableProvider
-          items={items}
-          setItems={setItems}
+          items={Object.values(tasks)}
           modifiers={[restrictToVerticalAxis]}
         >
           <ul>
-            {items.map(({ id, content }: TaskProps): JSX.Element => {
-              return <Task key={id} id={id} content={content} open={open} />;
-            })}
+            {Object.values(tasks).map(
+              ({ id, content }: TaskProps): JSX.Element => {
+                return <Task key={id} id={id} content={content} open={open} />;
+              }
+            )}
+            {open && (
+              <CreateTask
+                createTaskRef={createTaskRef}
+                open={open}
+                parentId={id}
+              />
+            )}
           </ul>
         </DroppableProvider>
         {open && (

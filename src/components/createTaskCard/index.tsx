@@ -27,13 +27,6 @@ const CreateTaskCard = () => {
             </h2>
           </header>
           <Task content="" id="1" open={true} taskRef={taskRef} />
-          {/* <p
-            ref={taskRef}
-            contentEditable={open}
-            suppressContentEditableWarning={true}
-            spellCheck={false}
-          ></p> */}
-          {console.log(taskRef)}
           <footer>
             <button onClick={() => handleOpen(false)}>Cerrar</button>
           </footer>

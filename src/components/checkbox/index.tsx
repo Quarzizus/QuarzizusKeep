@@ -1,17 +1,19 @@
-import { useState } from "react";
+import { Dispatch, SetStateAction } from "react";
 import { CheckBoxComponent, Icon } from "./styles";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
 
-const CheckBox = (): JSX.Element => {
-  const [checked, setChecked] = useState(false);
+interface props {
+  isChecked: boolean;
+  setIsChecked: Dispatch<SetStateAction<boolean>>;
+}
+
+const CheckBox = ({ isChecked, setIsChecked }: props): JSX.Element => {
   const handleClick = (): void => {
-    setChecked(!checked);
-    console.log("Holiwi");
+    setIsChecked(!isChecked);
   };
   return (
     <CheckBoxComponent onClick={handleClick}>
-      {checked && <Icon icon={faCheck} />}
+      {isChecked && <Icon icon={faCheck} />}
     </CheckBoxComponent>
   );
 };
