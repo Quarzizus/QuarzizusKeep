@@ -2,7 +2,7 @@ import { createContext, Dispatch, SetStateAction } from "react";
 import { UserData } from "./interfaces";
 
 interface AppContextProps {
-  userId: any;
+  userId: string;
   setUserId: Dispatch<SetStateAction<any>>;
   loading: boolean;
   error: any;

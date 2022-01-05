@@ -1,4 +1,3 @@
-import { TaskCardComponent } from "../taskCard/styles";
 import styled from "styled-components";
 
 const CreateTaskCardComponent = styled.section`
@@ -21,6 +20,8 @@ const CreateTaskCardComponent = styled.section`
     font-weight: 400;
     font-size: 1.1rem;
     caret-color: white;
+  }
+  .OpenH2 {
     margin-bottom: 12px;
   }
   footer {

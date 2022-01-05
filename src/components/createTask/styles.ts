@@ -14,6 +14,13 @@ const CreateTaskComponent = styled.article`
     outline: none;
     border-bottom: 1px solid white;
   }
+  button {
+    background-color: transparent;
+    border: none;
+    color: white;
+    cursor: pointer;
+    height: 15px;
+  }
 `;
 
 const Icon = styled(FontAwesomeIcon)`

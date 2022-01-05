@@ -18,6 +18,8 @@ const CreateTask = ({ createTaskRef, open, parentId }: props) => {
   }, [open]);
 
   const createNewTask = () => {
+    if (!createTaskRef.current?.textContent?.length) return;
+
     const postKey = push(child(ref(db), "posts")).key;
     const postData = {
       id: postKey,
@@ -27,6 +29,7 @@ const CreateTask = ({ createTaskRef, open, parentId }: props) => {
     const updates = {
       [userId + "/taskCards/" + parentId + "/tasks/" + postKey]: postData,
     };
+    createTaskRef.current.textContent = "";
     return update(ref(db), updates);
   };
 
@@ -45,9 +48,14 @@ const CreateTask = ({ createTaskRef, open, parentId }: props) => {
         suppressContentEditableWarning={true}
         spellCheck={false}
         ref={createTaskRef}
-      >
-        Aquí estoy
-      </p>
+        onKeyPress={(e) => {
+          if (e.key === "Enter") {
+            e.preventDefault();
+            createNewTask();
+            getTaskCard();
+          }
+        }}
+      ></p>
     </CreateTaskComponent>
   );
 };

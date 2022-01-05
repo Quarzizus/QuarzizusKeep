@@ -13,11 +13,11 @@ import {
   sortableKeyboardCoordinates,
   verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
-import { SetStateAction, useState } from "react";
+import { SetStateAction } from "react";
 
 interface props {
   children?: JSX.Element | JSX.Element[];
-  items: any;
+  items: any[];
   setItems: React.Dispatch<SetStateAction<any>>;
   modifiers?: Modifiers;
 }

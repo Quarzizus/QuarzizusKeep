@@ -17,7 +17,6 @@ const WrapperTask = styled.div<props>`
       position: absolute;
       top: 0;
       left: 0;
-      /* transition: 1s all ease; */
     `}
   @media screen and (max-width: 600px) {
     padding: 0 25px;

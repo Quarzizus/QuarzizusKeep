@@ -22,6 +22,7 @@ const CreateTaskCard = () => {
               contentEditable={open}
               suppressContentEditableWarning={true}
               spellCheck={false}
+              className="OpenH2"
             >
               Title
             </h2>
