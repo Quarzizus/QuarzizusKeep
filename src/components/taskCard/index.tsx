@@ -1,21 +1,20 @@
-import { TaskCardComponent, Icon, WrapperTask } from "./styles";
-import { faExpandArrowsAlt } from "@fortawesome/free-solid-svg-icons";
+import { useContext, useEffect, useState } from "react";
 import { useSortable } from "@dnd-kit/sortable";
-import { CSS } from "@dnd-kit/utilities";
-import { Task } from "../task";
-import { useContext, useEffect, useRef, useState } from "react";
-import { DroppableProvider } from "../containerTasks/DroppableProvider";
 import { restrictToVerticalAxis } from "@dnd-kit/modifiers";
+import { CSS } from "@dnd-kit/utilities";
+import { DroppableProvider } from "../containerTasks/DroppableProvider";
 import { props } from "./interfaces";
 import { props as TaskProps } from "../task/interfaces";
-import { CreateTask } from "../createTask";
 import { AppContext } from "../../context/AppContext";
+import { TaskCardFooter } from "./TaskCardFooter";
+import { TaskCardHeader } from "./TaskCardHeader";
+import { TaskCardContent } from "./TaskCardContent";
+import { TaskCardComponent, WrapperTask } from "./styles";
 
 const TaskCard = ({ title, id, tasks }: props) => {
   const { userData } = useContext(AppContext);
   const [open, setOpen] = useState(false);
   const [items, setItems] = useState([] as TaskProps[]);
-  const createTaskRef = useRef<HTMLParagraphElement>(null);
   const { transform, transition, setNodeRef, attributes, listeners } =
     useSortable({
       id: id,
@@ -24,7 +23,7 @@ const TaskCard = ({ title, id, tasks }: props) => {
     transform: CSS.Transform.toString(transform),
     transition,
   };
-  const handlerClick = (value: boolean) => {
+  const handleClick = (value: boolean) => {
     setOpen(value);
   };
 
@@ -36,54 +35,24 @@ const TaskCard = ({ title, id, tasks }: props) => {
     <WrapperTask open={open} ref={setNodeRef} style={style}>
       <TaskCardComponent
         onDoubleClick={() => {
-          !open && handlerClick(true);
+          !open && handleClick(true);
         }}
         open={open}
       >
-        <header>
-          <h3
-            contentEditable={open}
-            suppressContentEditableWarning={true}
-            spellCheck={false}
-          >
-            {title}
-          </h3>
-          {!open && (
-            <Icon icon={faExpandArrowsAlt} {...listeners} {...attributes} />
-          )}
-        </header>
+        <TaskCardHeader
+          attributes={{ ...attributes }}
+          listeners={{ ...listeners }}
+          open={open}
+          title={title}
+        />
         <DroppableProvider
           items={items}
           modifiers={[restrictToVerticalAxis]}
           setItems={setItems}
         >
-          <ul>
-            {!items.length && <h2>Loading</h2>}
-            {items.length &&
-              items.map(({ id, content }: TaskProps): JSX.Element => {
-                return <Task key={id} id={id} content={content} open={open} />;
-              })}
-            {open && (
-              <CreateTask
-                createTaskRef={createTaskRef}
-                open={open}
-                parentId={id}
-              />
-            )}
-          </ul>
+          <TaskCardContent items={items} open={open} parentId={id} />
         </DroppableProvider>
-        {open && (
-          <footer>
-            <button
-              type="button"
-              onClick={() => {
-                handlerClick(false);
-              }}
-            >
-              Cerrar
-            </button>
-          </footer>
-        )}
+        {open && <TaskCardFooter handleClick={handleClick} />}
       </TaskCardComponent>
     </WrapperTask>
   );
