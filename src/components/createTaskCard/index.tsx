@@ -1,15 +1,22 @@
-import { useEffect, useRef, useState } from "react";
-import { Task } from "../task";
+import { child, getDatabase, push, ref } from "firebase/database";
+import { useContext, useEffect, useRef, useState } from "react";
+import { AppContext } from "../../context/AppContext";
+import { CreateTask } from "../createTask";
 import { CreateTaskCardComponent } from "./styles";
 
 const CreateTaskCard = () => {
   const [open, setOpen] = useState(false);
-  const taskRef = useRef<HTMLParagraphElement>(null);
+  const { userId } = useContext(AppContext);
+  const createTaskRef = useRef<HTMLParagraphElement>(null);
+  const db = getDatabase();
+  const taskCardId = push(child(ref(db), userId)).key;
+
   const handleOpen = (value: boolean) => {
     setOpen(value);
   };
+
   useEffect(() => {
-    open && taskRef.current?.focus();
+    open && createTaskRef.current?.focus();
   }, [open]);
   return (
     <CreateTaskCardComponent>
@@ -27,7 +34,11 @@ const CreateTaskCard = () => {
               Title
             </h2>
           </header>
-          <Task content="" id="1" open={true} taskRef={taskRef} />
+          <CreateTask
+            open={open}
+            parentId={taskCardId}
+            createTaskRef={createTaskRef}
+          />
           <footer>
             <button onClick={() => handleOpen(false)}>Cerrar</button>
           </footer>

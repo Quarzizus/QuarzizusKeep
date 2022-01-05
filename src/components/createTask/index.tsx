@@ -7,7 +7,7 @@ import { child, getDatabase, push, ref, update } from "firebase/database";
 interface props {
   createTaskRef: RefObject<HTMLParagraphElement>;
   open: boolean;
-  parentId: string;
+  parentId: string | null;
 }
 
 const CreateTask = ({ createTaskRef, open, parentId }: props) => {
