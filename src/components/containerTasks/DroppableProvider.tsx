@@ -18,27 +18,30 @@ import { SetStateAction, useState } from "react";
 interface props {
   children?: JSX.Element | JSX.Element[];
   items: any;
-  // setItems: React.Dispatch<SetStateAction<any>>;
+  setItems: React.Dispatch<SetStateAction<any>>;
   modifiers?: Modifiers;
 }
 
-const DroppableProvider = ({ children, items, modifiers }: props) => {
-  const [itemsD, setItemsD] = useState(items);
+const DroppableProvider = ({ children, items, modifiers, setItems }: props) => {
   const sensors = useSensors(
     useSensor(PointerSensor),
     useSensor(KeyboardSensor, {
       coordinateGetter: sortableKeyboardCoordinates,
     })
   );
+
+  const searchIndex = (id: string) => {
+    const object = items.filter((item: any) => item.id === id);
+    return items.indexOf(object[0]);
+  };
+
   const handleDragEnd = (e: any) => {
     const { active, over } = e;
     if (active.id !== over.id) {
-      console.log(itemsD);
-      setItemsD((itemsD: any[]) => {
-        const oldIndex = itemsD[active.id].id;
-        const newIndex = itemsD[over.id].id;
-        return arrayMove(itemsD, oldIndex, newIndex);
-      });
+      const newIndex = searchIndex(active.id);
+      const oldIndex = searchIndex(over.id);
+      const newArray = arrayMove(items, newIndex, oldIndex);
+      setItems(newArray);
     }
   };
   return (
@@ -48,7 +51,7 @@ const DroppableProvider = ({ children, items, modifiers }: props) => {
       onDragEnd={handleDragEnd}
       modifiers={modifiers}
     >
-      <SortableContext items={itemsD} strategy={verticalListSortingStrategy}>
+      <SortableContext items={items} strategy={verticalListSortingStrategy}>
         {children}
       </SortableContext>
     </DndContext>

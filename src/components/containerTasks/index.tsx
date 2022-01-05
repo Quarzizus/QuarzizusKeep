@@ -13,8 +13,7 @@ import { AppContext } from "../../context/AppContext";
 // }
 
 const ContainerTasks = (): JSX.Element => {
-  const { userData, setUserData } = useContext(AppContext);
-
+  const { userData, setUserData, loading } = useContext(AppContext);
   const breakpointColumnsObj = {
     default: 4,
     1150: 3,
@@ -23,11 +22,19 @@ const ContainerTasks = (): JSX.Element => {
   };
   return (
     <>
-      <DroppableProvider items={userData.taskCards}>
+      <DroppableProvider items={userData.taskCards} setItems={setUserData}>
         <ContainerMasonry className="WW" breakpointCols={breakpointColumnsObj}>
+          {console.log(userData)}
           {userData.taskCards.map(
             ({ id, tasks, title }: TaskCardProps): JSX.Element => {
-              return <TaskCard key={id} id={id} title={title} tasks={tasks} />;
+              return (
+                <TaskCard
+                  key={id}
+                  id={id}
+                  title={title}
+                  tasks={Object.values(tasks)}
+                />
+              );
             }
           )}
         </ContainerMasonry>

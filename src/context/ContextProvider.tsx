@@ -28,7 +28,6 @@ const ContextProvider = ({ children }: ContextProviderProps) => {
       onValue(reference, (snapshot) => {
         const data = snapshot.val();
         setUserData(data);
-        console.log(data);
       });
       setLoading(false);
     } catch (err) {
