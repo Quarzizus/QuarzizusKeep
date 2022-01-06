@@ -7,7 +7,7 @@ import { props as TaskCardProps } from "../taskCard/interfaces";
 import { AppContext } from "../../context/AppContext";
 
 const ContainerTasks = (): JSX.Element => {
-  const { userData, setUserData } = useContext(AppContext);
+  const { taskCards, setTaskCards } = useContext(AppContext);
   const breakpointColumnsObj = {
     default: 4,
     1150: 3,
@@ -16,20 +16,11 @@ const ContainerTasks = (): JSX.Element => {
   };
   return (
     <>
-      <DroppableProvider items={userData.taskCards} setItems={setUserData}>
+      <DroppableProvider items={taskCards} setItems={setTaskCards}>
         <ContainerMasonry className="WW" breakpointCols={breakpointColumnsObj}>
-          {userData.taskCards.map(
-            ({ id, tasks, title }: TaskCardProps): JSX.Element => {
-              return (
-                <TaskCard
-                  key={id}
-                  id={id}
-                  title={title}
-                  tasks={Object.values(tasks)}
-                />
-              );
-            }
-          )}
+          {taskCards.map(({ id, tasks, title }: TaskCardProps) => {
+            return <TaskCard key={id} id={id} title={title} tasks={tasks} />;
+          })}
         </ContainerMasonry>
       </DroppableProvider>
     </>

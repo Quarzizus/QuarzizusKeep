@@ -1,7 +1,7 @@
 import { RefObject } from "react";
 
 interface props {
-  content: string;
+  content: string | null;
   id: string;
   open: boolean;
   checked?: boolean;

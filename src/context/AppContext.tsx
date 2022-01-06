@@ -9,6 +9,8 @@ interface AppContextProps {
   userData: UserData;
   setUserData: Dispatch<SetStateAction<any>>;
   getTaskCard: () => Promise<void>;
+  taskCards: any;
+  setTaskCards: Dispatch<SetStateAction<any>>;
 }
 
 const AppContext = createContext({} as AppContextProps);

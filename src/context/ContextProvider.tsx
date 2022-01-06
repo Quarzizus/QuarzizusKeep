@@ -19,7 +19,10 @@ const ContextProvider = ({ children }: ContextProviderProps) => {
   });
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<any>(null);
-  const [userData, setUserData] = useState<UserData>(user);
+  const [userData, setUserData] = useState<any>(user);
+  const [taskCards, setTaskCards] = useState<any[]>(() => {
+    return Object.values(userData.taskCards);
+  });
   const db = getDatabase();
   const getTaskCard = async () => {
     try {
@@ -27,7 +30,8 @@ const ContextProvider = ({ children }: ContextProviderProps) => {
       const reference = ref(db, userId);
       onValue(reference, (snapshot) => {
         const data = snapshot.val();
-        setUserData(data);
+        const cards = Object.values(data.taskCards);
+        setTaskCards(cards);
       });
       setLoading(false);
     } catch (err) {
@@ -46,6 +50,8 @@ const ContextProvider = ({ children }: ContextProviderProps) => {
     userData,
     getTaskCard,
     setUserData,
+    taskCards,
+    setTaskCards,
   };
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;

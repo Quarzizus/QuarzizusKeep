@@ -3,7 +3,7 @@ import { props as TaskCardProps } from "../components/taskCard/interfaces";
 interface UserData {
   email: string;
   userId: string;
-  taskCards: TaskCardProps[];
+  taskCards: TaskCardProps;
 }
 
 export type { UserData };

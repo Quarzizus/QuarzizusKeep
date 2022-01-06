@@ -17,7 +17,7 @@ import { SetStateAction } from "react";
 
 interface props {
   children?: JSX.Element | JSX.Element[];
-  items: any[];
+  items: any[] | any;
   setItems: React.Dispatch<SetStateAction<any>>;
   modifiers?: Modifiers;
 }
@@ -29,12 +29,10 @@ const DroppableProvider = ({ children, items, modifiers, setItems }: props) => {
       coordinateGetter: sortableKeyboardCoordinates,
     })
   );
-
   const searchIndex = (id: string) => {
     const object = items.filter((item: any) => item.id === id);
     return items.indexOf(object[0]);
   };
-
   const handleDragEnd = (e: any) => {
     const { active, over } = e;
     if (active.id !== over.id) {

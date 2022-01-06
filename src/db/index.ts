@@ -1,8 +1,8 @@
 const user = {
   userId: "",
   email: "",
-  taskCards: [
-    {
+  taskCards: {
+    "0": {
       id: "0",
       tasks: [
         {
@@ -14,7 +14,7 @@ const user = {
       ],
       title: "Welcome",
     },
-  ],
+  },
 };
 
 export { user };

@@ -1,18 +1,16 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useSortable } from "@dnd-kit/sortable";
 import { restrictToVerticalAxis } from "@dnd-kit/modifiers";
 import { CSS } from "@dnd-kit/utilities";
 import { DroppableProvider } from "../containerTasks/DroppableProvider";
 import { props } from "./interfaces";
 import { props as TaskProps } from "../task/interfaces";
-import { AppContext } from "../../context/AppContext";
 import { TaskCardFooter } from "./TaskCardFooter";
 import { TaskCardHeader } from "./TaskCardHeader";
 import { TaskCardContent } from "./TaskCardContent";
 import { TaskCardComponent, WrapperTask } from "./styles";
 
 const TaskCard = ({ title, id, tasks }: props) => {
-  const { userData } = useContext(AppContext);
   const [open, setOpen] = useState(false);
   const [items, setItems] = useState([] as TaskProps[]);
   const { transform, transition, setNodeRef, attributes, listeners } =
@@ -28,8 +26,8 @@ const TaskCard = ({ title, id, tasks }: props) => {
   };
 
   useEffect(() => {
-    setItems(tasks);
-  }, [userData]);
+    setItems(() => Object.values(tasks));
+  }, [tasks]);
 
   return (
     <WrapperTask open={open} ref={setNodeRef} style={style}>
