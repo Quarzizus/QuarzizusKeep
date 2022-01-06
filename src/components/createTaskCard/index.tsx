@@ -1,11 +1,12 @@
-import { child, getDatabase, push, ref, update } from "firebase/database";
+import { child, getDatabase, push, ref } from "firebase/database";
 import { useContext, useEffect, useRef, useState } from "react";
 import { AppContext } from "../../context/AppContext";
-import { Task } from "../task";
 import { CreateTaskInTaskCard } from "./CreateTaskInTaskCard";
 import { CreateTaskCardComponent } from "./styles";
 import { props as TaskCardProps } from "../taskCard/interfaces";
-import { props as TaskProps } from "../task/interfaces";
+import { CreateTaskCardFooter } from "./CreateTaskCardFooter";
+import { CreateTaskCardHeader } from "./CreateTaskCardHeader";
+import { CreateTaskCardContent } from "./CreateTaskCardContent";
 
 const CreateTaskCard = () => {
   const [open, setOpen] = useState(false);
@@ -18,13 +19,6 @@ const CreateTaskCard = () => {
   const [taskCardId, setTaskCardId] = useState<any>(
     push(child(ref(db), userId)).key
   );
-
-  const handleSubmit = () => {
-    const updates = {
-      ["/" + userId + "/taskCards/" + taskCardId]: data,
-    };
-    return update(ref(db), updates);
-  };
 
   const handleOpen = (value: boolean) => {
     setOpen(value);
@@ -44,38 +38,19 @@ const CreateTaskCard = () => {
         <h2 onClick={() => handleOpen(true)}>Create one note...</h2>
       ) : (
         <>
-          <header>
-            <h2
-              contentEditable={open}
-              suppressContentEditableWarning={true}
-              spellCheck={false}
-              className="OpenH2"
-            >
-              Title
-            </h2>
-          </header>
-          {data.tasks &&
-            Object.values(data.tasks).map(
-              ({ id, content }: TaskProps): JSX.Element => {
-                return <Task key={id} id={id} content={content} open={open} />;
-              }
-            )}
+          <CreateTaskCardHeader open={open} />
+          <CreateTaskCardContent items={data} open={open} />
           <CreateTaskInTaskCard
             open={open}
             createTaskInTaskCardRef={createTaskInTaskCardRef}
             taskCardId={taskCardId}
             setData={setData}
           />
-          <footer>
-            <button
-              onClick={() => {
-                handleSubmit();
-                handleOpen(false);
-              }}
-            >
-              Cerrar
-            </button>
-          </footer>
+          <CreateTaskCardFooter
+            handleOpen={handleOpen}
+            data={data}
+            taskCardId={taskCardId}
+          />
         </>
       )}
     </CreateTaskCardComponent>
