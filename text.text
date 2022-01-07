@@ -1,4 +1,0 @@
-Argument of type '{ userId: string; email: string; taskCards: { "0": { id: string; tasks: { id: string; checked: boolean; content: string; open: boolean; }[]; title: string; }; }; }' is not assignable to parameter of type 'UserData | (() => UserData)'.
-  Type '{ userId: string; email: string; taskCards: { "0": { id: string; tasks: { id: string; checked: boolean; content: string; open: boolean; }[]; title: string; }; }; }' is not assignable to type 'UserData'.
-    Types of property 'taskCards' are incompatible.
-      Type '{ "0": { id: string; tasks: { id: string; checked: boolean; content: string; open: boolean; }[]; title: string; }; }' is missing the following properties from type 'props[]': length, pop, push, concat, and 29 more.ts(2345)

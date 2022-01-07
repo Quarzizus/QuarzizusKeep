@@ -12,6 +12,7 @@ const user = {
           open: false,
         },
       },
+
       title: "Welcome",
     },
   },
