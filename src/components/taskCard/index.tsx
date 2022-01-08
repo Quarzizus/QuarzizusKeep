@@ -4,15 +4,15 @@ import { restrictToVerticalAxis } from "@dnd-kit/modifiers";
 import { CSS } from "@dnd-kit/utilities";
 import { DroppableProvider } from "../containerTasks/DroppableProvider";
 import { props } from "./interfaces";
-import { props as TaskProps } from "../task/interfaces";
 import { TaskCardFooter } from "./TaskCardFooter";
 import { TaskCardHeader } from "./TaskCardHeader";
 import { TaskCardContent } from "./TaskCardContent";
 import { TaskCardComponent, WrapperTask } from "./styles";
+import { props as TaskProps } from "../task/interfaces";
 
 const TaskCard = ({ title, id, tasks }: props) => {
   const [open, setOpen] = useState(false);
-  const [items, setItems] = useState([] as TaskProps[]);
+  const [items, setItems] = useState<TaskProps[]>(Object.values(tasks));
   const { transform, transition, setNodeRef, attributes, listeners } =
     useSortable({
       id: id,
@@ -48,7 +48,9 @@ const TaskCard = ({ title, id, tasks }: props) => {
           modifiers={[restrictToVerticalAxis]}
           setItems={setItems}
         >
-          <TaskCardContent items={items} open={open} parentId={id} />
+          {items && (
+            <TaskCardContent items={items} open={open} taskCardId={id} />
+          )}
         </DroppableProvider>
         {open && <TaskCardFooter handleClick={handleClick} />}
       </TaskCardComponent>

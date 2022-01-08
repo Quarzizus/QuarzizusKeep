@@ -3,7 +3,7 @@ import { props as Task } from "../task/interfaces";
 interface props {
   title: string;
   id: string;
-  tasks: Task[];
+  tasks: { [key: string]: Task };
 }
 
 export type { props };

@@ -7,10 +7,10 @@ import { child, getDatabase, push, ref, update } from "firebase/database";
 interface props {
   createTaskRef: RefObject<HTMLParagraphElement>;
   open: boolean;
-  parentId: string | null;
+  taskCardId: string | null;
 }
 
-const CreateTask = ({ createTaskRef, open, parentId }: props) => {
+const CreateTask = ({ createTaskRef, open, taskCardId }: props) => {
   const { userId, getTaskCard } = useContext(AppContext);
   const db = getDatabase();
   useEffect(() => {
@@ -20,14 +20,14 @@ const CreateTask = ({ createTaskRef, open, parentId }: props) => {
   const createNewTask = () => {
     if (!createTaskRef.current?.textContent?.length) return;
 
-    const postKey = push(child(ref(db), "posts")).key;
+    const taskId = push(child(ref(db), "posts")).key;
     const postData = {
-      id: postKey,
+      id: taskId,
       content: createTaskRef.current?.textContent,
       checked: false,
     };
     const updates = {
-      [userId + "/taskCards/" + parentId + "/tasks/" + postKey]: postData,
+      [userId + "/taskCards/" + taskCardId + "/tasks/" + taskId]: postData,
     };
     createTaskRef.current.textContent = "";
     return update(ref(db), updates);
@@ -35,6 +35,7 @@ const CreateTask = ({ createTaskRef, open, parentId }: props) => {
 
   return (
     <CreateTaskComponent>
+      {console.log(userId + "/taskCards/" + taskCardId + "/tasks/" + "taskId")}
       <button
         onClick={() => {
           createNewTask();

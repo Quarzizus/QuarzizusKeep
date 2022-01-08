@@ -1,5 +1,5 @@
 import { createContext, Dispatch, SetStateAction } from "react";
-import { UserData } from "./interfaces";
+import { UserData, TaskCardPropsExtend } from "./interfaces";
 
 interface AppContextProps {
   userId: string;
@@ -7,10 +7,10 @@ interface AppContextProps {
   loading: boolean;
   error: any;
   userData: UserData;
-  setUserData: Dispatch<SetStateAction<any>>;
+  setUserData: Dispatch<SetStateAction<UserData>>;
   getTaskCard: () => Promise<void>;
-  taskCards: any;
-  setTaskCards: Dispatch<SetStateAction<any>>;
+  taskCards: TaskCardPropsExtend;
+  setTaskCards: Dispatch<SetStateAction<TaskCardPropsExtend>>;
 }
 
 const AppContext = createContext({} as AppContextProps);

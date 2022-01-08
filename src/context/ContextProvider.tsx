@@ -1,13 +1,13 @@
 import { getDatabase, onValue, ref } from "firebase/database";
 import { useEffect, useState } from "react";
-import { user } from "../db";
+import { squeleton } from "../db/index";
 import { AppContext } from "./AppContext";
-import { UserData } from "./interfaces";
+import { TaskCardPropsExtend, UserData } from "./interfaces";
+import { props as TaskCardProps } from "../components/taskCard/interfaces";
 
 interface ContextProviderProps {
   children: JSX.Element | JSX.Element[];
 }
-
 const ContextProvider = ({ children }: ContextProviderProps) => {
   const [userId, setUserId] = useState(() => {
     try {
@@ -19,10 +19,11 @@ const ContextProvider = ({ children }: ContextProviderProps) => {
   });
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<any>(null);
-  const [userData, setUserData] = useState<any>(user);
-  const [taskCards, setTaskCards] = useState<any[]>(() => {
+  const [userData, setUserData] = useState<UserData>(squeleton);
+  const [taskCards, setTaskCards] = useState<TaskCardPropsExtend>(() => {
     return Object.values(userData.taskCards);
   });
+
   const db = getDatabase();
   const getTaskCard = async () => {
     try {
@@ -36,12 +37,11 @@ const ContextProvider = ({ children }: ContextProviderProps) => {
       setLoading(false);
     } catch (err) {
       setError(err);
+      console.log(err);
       setLoading(false);
     }
   };
-  useEffect(() => {
-    getTaskCard();
-  }, []);
+
   const value = {
     userId,
     setUserId,

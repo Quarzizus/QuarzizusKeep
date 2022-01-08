@@ -5,19 +5,23 @@ import { useContext, useEffect } from "react";
 import { AppContext } from "../../context/AppContext";
 import { CreateTaskCard } from "../../components/createTaskCard";
 import { HomePage } from "./styles";
+import { TaskCard } from "../../components/taskCard";
 
 const Home = () => {
-  const { userId, loading, error } = useContext(AppContext);
-
+  const { userId, loading, error, taskCards, getTaskCard } =
+    useContext(AppContext);
+  useEffect(() => {
+    getTaskCard();
+  }, []);
   return (
     <>
       <Sidebar />
       <HomePage>
         <CreateTaskCard />
-        {error && <h2>Error Mijo</h2>}
+        {/* {error !== null && <h2>Error Mijo</h2>} */}
         {!userId && <h2>No hay userID</h2>}
         {loading && <Spinner />}
-        {userId && !loading && !error && <ContainerTasks />}
+        {userId && !loading && <ContainerTasks />}
       </HomePage>
     </>
   );

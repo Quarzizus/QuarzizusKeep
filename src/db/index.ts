@@ -1,11 +1,11 @@
-const user = {
+const initialDataUser = {
   userId: "",
   email: "",
   taskCards: {
-    "0": {
+    cero: {
       id: "0",
       tasks: {
-        "0": {
+        cero: {
           id: "0",
           checked: false,
           content: "You can add here yours tasks",
@@ -18,4 +18,23 @@ const user = {
   },
 };
 
-export { user };
+const squeleton = {
+  userId: "",
+  email: "",
+  taskCards: {
+    "": {
+      id: "",
+      tasks: {
+        "": {
+          id: "",
+          checked: false,
+          content: "",
+          open: false,
+        },
+      },
+      title: "",
+    },
+  },
+};
+
+export { initialDataUser, squeleton };

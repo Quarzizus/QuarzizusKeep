@@ -6,10 +6,10 @@ import { props as TaskProps } from "../task/interfaces";
 interface props {
   items: TaskProps[];
   open: boolean;
-  parentId: string;
+  taskCardId: string;
 }
 
-const TaskCardContent = ({ items, open, parentId }: props) => {
+const TaskCardContent = ({ items, open, taskCardId }: props) => {
   const createTaskRef = useRef<HTMLParagraphElement>(null);
 
   return (
@@ -23,7 +23,7 @@ const TaskCardContent = ({ items, open, parentId }: props) => {
         <CreateTask
           createTaskRef={createTaskRef}
           open={open}
-          parentId={parentId}
+          taskCardId={taskCardId}
         />
       )}
     </ul>

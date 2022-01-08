@@ -7,7 +7,7 @@ import { props as TaskCardProps } from "../taskCard/interfaces";
 interface props {
   open: boolean;
   createTaskInTaskCardRef: RefObject<HTMLParagraphElement>;
-  setData: Dispatch<SetStateAction<any>>;
+  setData: Dispatch<SetStateAction<TaskCardProps>>;
   taskCardId: any;
 }
 
