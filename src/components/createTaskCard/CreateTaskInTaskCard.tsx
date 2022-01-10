@@ -20,7 +20,13 @@ const CreateTaskInTaskCard = ({
   const db = getDatabase();
 
   const handleClick = () => {
+    if (!createTaskInTaskCardRef.current?.textContent?.length) return;
     const taskPost: any = push(child(ref(db), taskCardId)).key;
+    const taskData = {
+      content: createTaskInTaskCardRef.current?.textContent,
+      id: taskPost,
+      open: open,
+    };
     setData((data: TaskCardProps) => {
       return {
         ...data,
@@ -28,14 +34,11 @@ const CreateTaskInTaskCard = ({
         title: "Title",
         tasks: {
           ...data.tasks,
-          [taskPost]: {
-            content: createTaskInTaskCardRef.current?.textContent,
-            id: taskPost,
-            open: open,
-          },
+          [taskPost]: taskData,
         },
       };
     });
+    createTaskInTaskCardRef.current.textContent = "";
   };
 
   return (
@@ -48,6 +51,12 @@ const CreateTaskInTaskCard = ({
         suppressContentEditableWarning={true}
         spellCheck={false}
         ref={createTaskInTaskCardRef}
+        onKeyPress={(e) => {
+          if (e.key === "Enter") {
+            e.preventDefault();
+            handleClick();
+          }
+        }}
       ></p>
     </CreateTaskComponent>
   );

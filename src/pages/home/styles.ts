@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 const HomePage = styled.section`
+  background-color: rgba(12, 18, 12);
   width: 100%;
   height: 100vh;
   display: grid;

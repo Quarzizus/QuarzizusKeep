@@ -24,11 +24,11 @@ const WrapperTask = styled.div<props>`
 `;
 
 const TaskCardComponent = styled.article<props>`
-  background-color: black;
+  background-color: #020202;
   cursor: pointer;
   border-radius: 10px;
   padding: 15px 20px;
-  color: #fff;
+  color: rgb(217, 217, 217);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
