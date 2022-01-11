@@ -35,7 +35,6 @@ const CreateTask = ({ createTaskRef, open, taskCardId }: props) => {
 
   return (
     <CreateTaskComponent>
-      {console.log(userId + "/taskCards/" + taskCardId + "/tasks/" + "taskId")}
       <button
         onClick={() => {
           createNewTask();

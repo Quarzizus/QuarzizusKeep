@@ -2,7 +2,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styled, { css } from "styled-components";
 
 interface props {
-  open: boolean;
+  open: boolean | null;
 }
 const WrapperTask = styled.div<props>`
   ${({ open }) =>

@@ -11,7 +11,7 @@ import { TaskCardComponent, WrapperTask } from "./styles";
 import { props as TaskProps } from "../task/interfaces";
 
 const TaskCard = ({ title, id, tasks }: props) => {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState<null | boolean>(null);
   const [items, setItems] = useState<TaskProps[]>(Object.values(tasks));
   const { transform, transition, setNodeRef, attributes, listeners } =
     useSortable({

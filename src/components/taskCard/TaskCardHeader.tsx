@@ -11,7 +11,7 @@ interface Atributes {
 }
 
 interface props {
-  open: boolean;
+  open: boolean | null;
   title: string;
   listeners: DraggableSyntheticListeners;
   attributes: Atributes;
@@ -21,7 +21,7 @@ const TaskCardHeader = ({ open, title, attributes, listeners }: props) => {
   return (
     <header>
       <h3
-        contentEditable={open}
+        contentEditable={open as boolean}
         suppressContentEditableWarning={true}
         spellCheck={false}
       >
