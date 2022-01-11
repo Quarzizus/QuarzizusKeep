@@ -6,6 +6,6 @@ interface UserData {
   taskCards: { [key: string]: TaskCardProps };
 }
 
-type TaskCardPropsExtend = TaskCardProps | TaskCardProps[] | unknown[];
+type TaskCardPropsExtend = TaskCardProps[];
 
 export type { TaskCardPropsExtend, UserData };

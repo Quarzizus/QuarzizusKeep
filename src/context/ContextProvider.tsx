@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import { squeleton } from "../db/index";
 import { AppContext } from "./AppContext";
 import { TaskCardPropsExtend, UserData } from "./interfaces";
-import { props as TaskCardProps } from "../components/taskCard/interfaces";
 
 interface ContextProviderProps {
   children: JSX.Element | JSX.Element[];
@@ -32,7 +31,7 @@ const ContextProvider = ({ children }: ContextProviderProps) => {
       onValue(reference, (snapshot) => {
         const data = snapshot.val();
         const cards = Object.values(data.taskCards);
-        setTaskCards(cards);
+        setTaskCards(cards as TaskCardPropsExtend);
       });
       setLoading(false);
     } catch (err) {

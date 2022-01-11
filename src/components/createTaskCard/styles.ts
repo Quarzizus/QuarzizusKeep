@@ -39,6 +39,10 @@ const CreateTaskCardComponent = styled.section`
       cursor: pointer;
     }
   }
+
+  @media screen and (max-width: 700px) {
+    width: 80%;
+  }
 `;
 
 export { CreateTaskCardComponent };

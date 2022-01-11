@@ -18,6 +18,10 @@ const ContainerMasonry = styled(Masonry)`
   overflow-y: scroll;
   grid-column: 1/-1;
   grid-row: 2/3;
+  @media screen and (max-width: 700px) {
+    width: 80%;
+    padding: 15px 0;
+  }
 `;
 
 export { ContainerTasksComponent, ContainerMasonry };

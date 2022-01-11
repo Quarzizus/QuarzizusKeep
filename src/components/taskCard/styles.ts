@@ -19,7 +19,9 @@ const WrapperTask = styled.div<props>`
       left: 0;
     `}
   @media screen and (max-width: 600px) {
-    padding: 0 25px;
+    padding: 0 0px;
+    margin: 0 0 0 -20px;
+    width: 100%;
   }
 `;
 
