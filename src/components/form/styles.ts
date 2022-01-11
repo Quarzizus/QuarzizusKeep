@@ -17,6 +17,11 @@ const FormComponent = styled.form`
     text-decoration: underline;
     cursor: pointer;
   }
+  @media screen and (max-width: 516px) {
+    min-width: 100%;
+    height: 100vh;
+    padding: 40px 10px;
+  }
 `;
 
 const Header = styled.header`
@@ -31,6 +36,7 @@ const Header = styled.header`
 `;
 
 const InputContainer = styled.article`
+  width: 100%;
   height: 75px;
   border-left: 4px solid ${colorMain};
   display: flex;
@@ -40,9 +46,12 @@ const InputContainer = styled.article`
   label {
     margin-left: 10px;
     font-size: 0.8rem;
+    width: 100%;
   }
   div {
     display: flex;
+    width: 100%;
+
     align-items: center;
     justify-content: space-between;
     padding-right: 10px;
@@ -56,6 +65,7 @@ const InputContainer = styled.article`
 `;
 
 const Input = styled.input`
+  width: 100%;
   background-color: transparent;
   height: 50%;
   border: none;
@@ -85,6 +95,7 @@ const ButtonLogin = styled.button`
 `;
 
 const LoginAlternatives = styled.section`
+  width: 100%;
   display: flex;
   align-items: center;
   p {

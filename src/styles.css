@@ -12,8 +12,6 @@
 body {
   overflow: hidden;
   position: relative;
-  scrollbar-width: thin;
-  scrollbar-color: white black;
 }
 .App {
   width: 100%;
