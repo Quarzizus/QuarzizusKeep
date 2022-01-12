@@ -10,9 +10,9 @@ import { AppContext } from "../../context/AppContext";
 import { updateTask } from "./utils/updateTask";
 import { getDatabase } from "firebase/database";
 
-const Task = ({ content, open, id, taskRef, taskCardId }: props) => {
+const Task = ({ content, open, id, taskRef, taskCardId, checked }: props) => {
   const { userId } = useContext(AppContext);
-  const [isChecked, setIsChecked] = useState(false);
+  const [isChecked, setIsChecked] = useState(checked);
   const [contentState, setContentState] = useState(content);
   const db = getDatabase();
 
@@ -27,17 +27,22 @@ const Task = ({ content, open, id, taskRef, taskCardId }: props) => {
 
   useEffect(() => {
     const data = {
-      open: open,
       id: id,
       content: contentState,
     };
-    open === false && updateTask({ db, data, userId, id, taskCardId });
+    const urlAllData = userId + "/taskCards/" + taskCardId + "/tasks/" + id;
+
+    open === false && updateTask({ db, data, url: urlAllData });
   }, [open]);
 
   return (
     <TaskComponent ref={setNodeRef} style={style}>
       {open && <Icon icon={faGripVertical} {...attributes} {...listeners} />}
-      <CheckBox isChecked={isChecked} setIsChecked={setIsChecked} />
+      <CheckBox
+        isChecked={isChecked}
+        setIsChecked={setIsChecked}
+        url={userId + "/taskCards/" + taskCardId + "/tasks/" + id + "/checked/"}
+      />
       <p
         contentEditable={open as boolean}
         suppressContentEditableWarning={true}

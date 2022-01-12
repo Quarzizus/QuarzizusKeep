@@ -3,20 +3,15 @@ import { Database, ref, update } from "firebase/database";
 const updateTask = ({
   db,
   data,
-  userId,
-  taskCardId,
-  id,
+  url,
 }: {
   db: Database;
   data: any;
-  userId: string;
-  taskCardId: string | undefined;
-  id: string;
+  url: string;
 }) => {
   const updates = {
-    [userId + "/taskCards/" + taskCardId + "/tasks/" + id]: data,
+    [url]: data,
   };
-
   return update(ref(db), updates);
 };
 

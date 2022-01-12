@@ -4,7 +4,7 @@ interface props {
   content: string | null;
   id: string;
   open: boolean | null;
-  checked?: boolean;
+  checked: boolean;
   taskRef?: RefObject<HTMLParagraphElement>;
   taskCardId?: string;
 }

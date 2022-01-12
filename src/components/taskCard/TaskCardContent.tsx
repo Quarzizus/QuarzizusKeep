@@ -15,7 +15,7 @@ const TaskCardContent = ({ items, open, taskCardId }: props) => {
     <ul>
       {!items.length && <h2>Loading</h2>}
       {items.length &&
-        items.map(({ id, content }: TaskProps): JSX.Element => {
+        items.map(({ id, content, checked }: TaskProps): JSX.Element => {
           return (
             <Task
               key={id}
@@ -23,6 +23,7 @@ const TaskCardContent = ({ items, open, taskCardId }: props) => {
               content={content}
               open={open}
               taskCardId={taskCardId}
+              checked={checked}
             />
           );
         })}
