@@ -10,6 +10,7 @@ import { CreateTaskCardContent } from "./CreateTaskCardContent";
 
 const CreateTaskCard = () => {
   const [open, setOpen] = useState(false);
+  const [title, setTitle] = useState("Title");
   const { userId } = useContext(AppContext);
   const [data, setData] = useState({} as TaskCardProps);
   const createTaskInTaskCardRef = useRef<HTMLParagraphElement>(
@@ -38,13 +39,14 @@ const CreateTaskCard = () => {
         <h2 onClick={() => handleOpen(true)}>Create one note...</h2>
       ) : (
         <>
-          <CreateTaskCardHeader open={open} />
+          <CreateTaskCardHeader open={open} setTitle={setTitle} />
           <CreateTaskCardContent items={data} open={open} />
           <CreateTaskInTaskCard
             open={open}
             createTaskInTaskCardRef={createTaskInTaskCardRef}
             taskCardId={taskCardId}
             setData={setData}
+            titleState={title}
           />
           <CreateTaskCardFooter
             handleOpen={handleOpen}

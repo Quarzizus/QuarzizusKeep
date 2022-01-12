@@ -8,7 +8,8 @@ interface props {
   open: boolean;
   createTaskInTaskCardRef: RefObject<HTMLParagraphElement>;
   setData: Dispatch<SetStateAction<TaskCardProps>>;
-  taskCardId: any;
+  taskCardId: string;
+  titleState: string;
 }
 
 const CreateTaskInTaskCard = ({
@@ -16,6 +17,7 @@ const CreateTaskInTaskCard = ({
   taskCardId,
   setData,
   open,
+  titleState,
 }: props) => {
   const db = getDatabase();
 
@@ -31,7 +33,7 @@ const CreateTaskInTaskCard = ({
       return {
         ...data,
         id: taskCardId,
-        title: "Title",
+        title: titleState,
         tasks: {
           ...data.tasks,
           [taskPost]: taskData,
