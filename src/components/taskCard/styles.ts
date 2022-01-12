@@ -43,7 +43,7 @@ const TaskCardComponent = styled.article<props>`
         `
       : css`
           margin: 20px 10px 10px 20px;
-          max-height: 250px;
+          max-height: 400px;
           overflow: hidden;
           &:hover {
             border: 2px solid rgba(98, 195, 112);
@@ -56,10 +56,14 @@ const TaskCardComponent = styled.article<props>`
     align-items: center;
   }
   h3 {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
     height: 30px;
     display: flex;
     align-items: center;
     width: 100%;
+    margin-bottom: 10px;
   }
   h3:focus {
     outline: 1px solid white;

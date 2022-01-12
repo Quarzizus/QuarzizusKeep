@@ -8,7 +8,7 @@ import { props } from "./interfaces";
 import { FormEvent, useContext, useEffect, useState } from "react";
 import { AppContext } from "../../context/AppContext";
 import { updateTask } from "./utils/updateTask";
-import { getDatabase, update } from "firebase/database";
+import { getDatabase } from "firebase/database";
 
 const Task = ({ content, open, id, taskRef, taskCardId }: props) => {
   const { userId } = useContext(AppContext);

@@ -38,10 +38,12 @@ const TaskCard = ({ title, id, tasks }: props) => {
         open={open}
       >
         <TaskCardHeader
+          taskCardId={id}
           attributes={{ ...attributes }}
           listeners={{ ...listeners }}
           open={open}
           title={title}
+          tasks={items}
         />
         <DroppableProvider
           items={items}
