@@ -2,11 +2,11 @@ const initialDataUser = {
   userId: "",
   email: "",
   taskCards: {
-    taskcardnumero1: {
-      id: "taskcardnumero1",
+    "-MtJD8mN1JH3z5UZSxnrTaskCard": {
+      id: "-MtJD8mN1JH3z5UZSxnrTaskCard",
       tasks: {
-        cero: {
-          id: "tasknumero1",
+        "-MtJD8mN1JH3z5UZSxnrTask": {
+          id: "-MtJD8mN1JH3z5UZSxnrTask",
           checked: false,
           content: "You can add here yours tasks",
           open: false,

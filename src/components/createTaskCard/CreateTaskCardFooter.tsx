@@ -1,6 +1,7 @@
-import { getDatabase, ref, update } from "firebase/database";
+import { getDatabase } from "firebase/database";
 import { useContext } from "react";
 import { AppContext } from "../../context/AppContext";
+import { handleUpdate } from "../../utils/handleUpdate";
 import { props as TaskCardProps } from "../taskCard/interfaces";
 
 interface props {
@@ -14,22 +15,14 @@ const CreateTaskCardFooter = ({ taskCardId, data, handleOpen }: props) => {
   const { userId } = useContext(AppContext);
 
   const handleSubmit = () => {
-    const updates = {
-      ["/" + userId + "/taskCards/" + taskCardId]: data,
-    };
-    return update(ref(db), updates);
+    const url = "/" + userId + "/taskCards/" + taskCardId;
+    handleUpdate({ db, data, url });
+    handleOpen(false);
   };
 
   return (
     <footer>
-      <button
-        onClick={() => {
-          handleSubmit();
-          handleOpen(false);
-        }}
-      >
-        Cerrar
-      </button>
+      <button onClick={handleSubmit}>Cerrar</button>
     </footer>
   );
 };

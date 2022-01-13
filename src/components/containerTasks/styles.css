@@ -1,8 +1,0 @@
-.Masonry {
-  width: 80%;
-  display: flex;
-  min-height: 100vh;
-  max-height: auto;
-  padding: 10px;
-  overflow-y: scroll;
-}

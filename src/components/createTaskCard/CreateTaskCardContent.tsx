@@ -12,8 +12,16 @@ const CreateTaskCardContent = ({ items, open }: props) => {
     <>
       {items.tasks &&
         Object.values(items.tasks).map(
-          ({ id, content }: TaskProps): JSX.Element => {
-            return <Task key={id} id={id} content={content} open={open} />;
+          ({ id, content, checked }: TaskProps): JSX.Element => {
+            return (
+              <Task
+                key={id}
+                id={id}
+                content={content}
+                open={open}
+                checked={checked}
+              />
+            );
           }
         )}
     </>

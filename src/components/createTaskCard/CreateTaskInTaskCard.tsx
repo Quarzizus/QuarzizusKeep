@@ -5,7 +5,6 @@ import { CreateTaskComponent, Icon } from "../createTask/styles";
 import { props as TaskCardProps } from "../taskCard/interfaces";
 
 interface props {
-  open: boolean;
   createTaskInTaskCardRef: RefObject<HTMLParagraphElement>;
   setData: Dispatch<SetStateAction<TaskCardProps>>;
   taskCardId: string;
@@ -16,7 +15,6 @@ const CreateTaskInTaskCard = ({
   createTaskInTaskCardRef,
   taskCardId,
   setData,
-  open,
   titleState,
 }: props) => {
   const db = getDatabase();
@@ -27,7 +25,7 @@ const CreateTaskInTaskCard = ({
     const taskData = {
       content: createTaskInTaskCardRef.current?.textContent,
       id: taskPost,
-      open: open,
+      checked: false,
     };
     setData((data: TaskCardProps) => {
       return {

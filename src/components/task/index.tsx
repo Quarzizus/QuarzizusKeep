@@ -7,8 +7,8 @@ import { CSS } from "@dnd-kit/utilities";
 import { props } from "./interfaces";
 import { FormEvent, useContext, useEffect, useState } from "react";
 import { AppContext } from "../../context/AppContext";
-import { updateTask } from "./utils/updateTask";
 import { getDatabase } from "firebase/database";
+import { handleUpdate } from "../../utils/handleUpdate";
 
 const Task = ({ content, open, id, taskRef, taskCardId, checked }: props) => {
   const { userId } = useContext(AppContext);
@@ -26,13 +26,10 @@ const Task = ({ content, open, id, taskRef, taskCardId, checked }: props) => {
   };
 
   useEffect(() => {
-    const data = {
-      id: id,
-      content: contentState,
-    };
-    const urlAllData = userId + "/taskCards/" + taskCardId + "/tasks/" + id;
+    const url =
+      userId + "/taskCards/" + taskCardId + "/tasks/" + id + "/content/";
 
-    open === false && updateTask({ db, data, url: urlAllData });
+    open === false && handleUpdate({ db, data: contentState, url });
   }, [open]);
 
   return (

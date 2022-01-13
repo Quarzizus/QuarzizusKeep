@@ -1,5 +1,4 @@
 import { TaskCard } from "../taskCard";
-import "./styles.css";
 import { useContext } from "react";
 import { DroppableProvider } from "./DroppableProvider";
 import { ContainerMasonry } from "./styles";

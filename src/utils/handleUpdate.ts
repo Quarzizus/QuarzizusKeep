@@ -1,20 +1,18 @@
 import { Database, ref, update } from "firebase/database";
 
-const updateTaskCard = ({
+const handleUpdate = ({
   db,
   data,
-  userId,
-  taskCardId,
+  url,
 }: {
   db: Database;
   data: any;
-  userId: string;
-  taskCardId: string | undefined;
+  url: string;
 }) => {
   const updates = {
-    [userId + "/taskCards/" + taskCardId]: data,
+    [url]: data,
   };
   return update(ref(db), updates);
 };
 
-export { updateTaskCard };
+export { handleUpdate };

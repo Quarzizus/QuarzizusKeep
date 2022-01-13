@@ -1,6 +1,6 @@
 import { CreateTaskComponent, Icon } from "./styles";
 import { faPlusSquare } from "@fortawesome/free-solid-svg-icons";
-import { RefObject, useContext, useEffect } from "react";
+import React, { RefObject, useContext, useEffect } from "react";
 import { AppContext } from "../../context/AppContext";
 import { child, getDatabase, push, ref, update } from "firebase/database";
 
@@ -13,6 +13,7 @@ interface props {
 const CreateTask = ({ createTaskRef, open, taskCardId }: props) => {
   const { userId, getTaskCard } = useContext(AppContext);
   const db = getDatabase();
+
   useEffect(() => {
     open && createTaskRef.current?.focus();
   }, [open]);
@@ -33,14 +34,22 @@ const CreateTask = ({ createTaskRef, open, taskCardId }: props) => {
     return update(ref(db), updates);
   };
 
+  const handleKeyPress = (e: React.KeyboardEvent<HTMLParagraphElement>) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      createNewTask();
+      getTaskCard();
+    }
+  };
+
+  const handleClick = () => {
+    createNewTask();
+    getTaskCard();
+  };
+
   return (
     <CreateTaskComponent>
-      <button
-        onClick={() => {
-          createNewTask();
-          getTaskCard();
-        }}
-      >
+      <button onClick={handleClick}>
         <Icon icon={faPlusSquare} />
       </button>
       <p
@@ -48,13 +57,7 @@ const CreateTask = ({ createTaskRef, open, taskCardId }: props) => {
         suppressContentEditableWarning={true}
         spellCheck={false}
         ref={createTaskRef}
-        onKeyPress={(e) => {
-          if (e.key === "Enter") {
-            e.preventDefault();
-            createNewTask();
-            getTaskCard();
-          }
-        }}
+        onKeyPress={handleKeyPress}
       ></p>
     </CreateTaskComponent>
   );

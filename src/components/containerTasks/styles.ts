@@ -1,14 +1,6 @@
 import styled from "styled-components";
 import Masonry from "react-masonry-css";
 
-const ContainerTasksComponent = styled.section`
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-  grid-auto-rows: 70px;
-  height: minmax(100vh, auto);
-  gap: 20px;
-`;
-
 const ContainerMasonry = styled(Masonry)`
   padding: 15px;
   height: 100%;
@@ -53,4 +45,4 @@ const ContainerMasonry = styled(Masonry)`
   }
 `;
 
-export { ContainerTasksComponent, ContainerMasonry };
+export { ContainerMasonry };

@@ -2,8 +2,8 @@ import { DraggableSyntheticListeners } from "@dnd-kit/core";
 import { Icon } from "./styles";
 import { faExpandArrowsAlt } from "@fortawesome/free-solid-svg-icons";
 import { FormEvent, useContext, useEffect, useState } from "react";
-import { updateTaskCard } from "./utils/updateTaskCard";
-import { getDatabase } from "firebase/database";
+import { handleUpdate } from "../../utils/handleUpdate";
+import { getDatabase, ref, update } from "firebase/database";
 import { AppContext } from "../../context/AppContext";
 import { props as TaskProps } from "../task/interfaces";
 
@@ -30,19 +30,20 @@ const TaskCardHeader = ({
   attributes,
   listeners,
   taskCardId,
-  tasks,
 }: props) => {
   const [titleState, setTitleState] = useState(title);
   const db = getDatabase();
   const { userId } = useContext(AppContext);
   useEffect(() => {
-    const data = {
-      title: titleState,
-      id: taskCardId,
-      tasks: {},
-    };
+    const urlBase = userId + "/taskCards/" + taskCardId;
 
-    open === false && updateTaskCard({ db, data, userId, taskCardId });
+    if (open === false) {
+      const updates = {
+        [urlBase + "/title/"]: titleState,
+        [urlBase + "/id/"]: taskCardId,
+      };
+      update(ref(db), updates);
+    }
   }, [open]);
 
   return (
