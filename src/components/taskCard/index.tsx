@@ -7,8 +7,9 @@ import { props } from "./interfaces";
 import { TaskCardFooter } from "./TaskCardFooter";
 import { TaskCardHeader } from "./TaskCardHeader";
 import { TaskCardContent } from "./TaskCardContent";
-import { TaskCardComponent, WrapperTask } from "./styles";
+import { TaskCardComponent } from "./styles";
 import { props as TaskProps } from "../task/interfaces";
+import { WrapperTaskCard } from "../wrapperTaskCard";
 
 const TaskCard = ({ title, id, tasks }: props) => {
   const [open, setOpen] = useState<null | boolean>(null);
@@ -30,7 +31,7 @@ const TaskCard = ({ title, id, tasks }: props) => {
   }, [tasks]);
 
   return (
-    <WrapperTask open={open} ref={setNodeRef} style={style}>
+    <WrapperTaskCard open={open} setNodeRef={setNodeRef} style={style}>
       <TaskCardComponent
         onDoubleClick={() => {
           !open && handleClick(true);
@@ -56,7 +57,7 @@ const TaskCard = ({ title, id, tasks }: props) => {
         </DroppableProvider>
         {open && <TaskCardFooter handleClick={handleClick} />}
       </TaskCardComponent>
-    </WrapperTask>
+    </WrapperTaskCard>
   );
 };
 
