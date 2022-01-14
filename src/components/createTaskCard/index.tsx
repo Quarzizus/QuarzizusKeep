@@ -42,7 +42,6 @@ const CreateTaskCard = () => {
           <CreateTaskCardHeader open={open} setTitle={setTitle} />
           <CreateTaskCardContent items={data} open={open} />
           <CreateTaskInTaskCard
-            open={open}
             createTaskInTaskCardRef={createTaskInTaskCardRef}
             taskCardId={taskCardId}
             setData={setData}
