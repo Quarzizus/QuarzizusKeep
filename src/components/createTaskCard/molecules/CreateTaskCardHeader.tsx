@@ -1,11 +1,13 @@
-import { Dispatch, FormEvent, SetStateAction } from "react";
+import { FormEvent, useContext, useState } from "react";
+import { CreateTaskCardContext } from "../context/CreateTaskCardContext";
 
 interface props {
   open: boolean;
-  setTitle: Dispatch<SetStateAction<string>>;
 }
 
-const CreateTaskCardHeader = ({ open, setTitle }: props) => {
+const CreateTaskCardHeader = ({ open }: props) => {
+  const [title, setTitle] = useState("title");
+  const { dispatch } = useContext(CreateTaskCardContext);
   return (
     <header>
       <h2
@@ -17,6 +19,12 @@ const CreateTaskCardHeader = ({ open, setTitle }: props) => {
           const { textContent } = target as HTMLHeadingElement;
           setTitle(textContent as string);
         }}
+        onBlur={() =>
+          dispatch({
+            type: "SET_TITLE",
+            payload: title,
+          })
+        }
       >
         Title
       </h2>

@@ -4,29 +4,10 @@ import styled, { css } from "styled-components";
 interface props {
   open: boolean | null;
 }
-const WrapperTask = styled.div<props>`
-  ${({ open }) =>
-    open &&
-    css`
-      width: 100vw;
-      background-color: #0007;
-      height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: absolute;
-      top: 0;
-      left: 0;
-    `}
-  @media screen and (max-width: 600px) {
-    padding: 0 0px;
-    margin: 0 0 0 -20px;
-    width: 100%;
-  }
-`;
 
 const TaskCardComponent = styled.article<props>`
   background-color: #020202;
+  transition: all 0s linear;
   cursor: pointer;
   border-radius: 10px;
   padding: 15px 20px;
@@ -36,13 +17,14 @@ const TaskCardComponent = styled.article<props>`
   justify-content: space-between;
   transition: 0.5s ease all;
   border: 2px solid rgba(98, 195, 112, 0.5);
+  width: 100%;
   ${({ open }) =>
     open
       ? css`
           width: 580px;
         `
       : css`
-          margin: 20px 10px 10px 20px;
+          margin: 20px 10px;
           max-height: 400px;
           overflow: hidden;
           &:hover {
@@ -63,7 +45,6 @@ const TaskCardComponent = styled.article<props>`
     display: flex;
     align-items: center;
     width: 100%;
-    margin-bottom: 10px;
   }
   h3:focus {
     outline: 1px solid white;
@@ -86,10 +67,6 @@ const TaskCardComponent = styled.article<props>`
       cursor: pointer;
     }
   }
-
-  @media screen and (max-width: 600px) {
-    width: 100%;
-  }
 `;
 
 const Icon = styled(FontAwesomeIcon)`
@@ -104,4 +81,4 @@ const Icon = styled(FontAwesomeIcon)`
   }
 `;
 
-export { TaskCardComponent, Icon, WrapperTask };
+export { TaskCardComponent, Icon };

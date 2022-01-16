@@ -4,22 +4,28 @@ interface props {
   open: boolean | null;
 }
 const WrapperTaskCardComponent = styled.div<props>`
+  transition: all 0s linear;
   ${({ open }) =>
-    open &&
-    css`
-      width: 100vw;
-      background-color: #0007;
-      height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: absolute;
-      top: 0;
-      left: 0;
-    `}
+    open
+      ? css`
+          width: 100vw;
+          background-color: #0007;
+          height: 100vh;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          position: absolute;
+          top: 0;
+          left: 0;
+        `
+      : css`
+          width: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        `}
   @media screen and (max-width: 600px) {
     padding: 0 0px;
-    margin: 0 0 0 -20px;
     width: 100%;
   }
 `;

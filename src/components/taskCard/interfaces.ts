@@ -4,6 +4,7 @@ interface props {
   title: string;
   id: string;
   tasks: { [key: string]: Task };
+  style?: any;
 }
 
 export type { props };

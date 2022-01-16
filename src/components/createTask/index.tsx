@@ -31,7 +31,7 @@ const CreateTask = ({ createTaskRef, open, taskCardId }: props) => {
       [userId + "/taskCards/" + taskCardId + "/tasks/" + taskId]: postData,
     };
     createTaskRef.current.textContent = "";
-    return update(ref(db), updates);
+    // return update(ref(db), updates);
   };
 
   const handleKeyPress = (e: React.KeyboardEvent<HTMLParagraphElement>) => {

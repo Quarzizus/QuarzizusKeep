@@ -13,8 +13,8 @@ const TaskCardContent = ({ items, open, taskCardId }: props) => {
   const createTaskRef = useRef<HTMLParagraphElement>(null);
   return (
     <ul>
-      {!items.length && <h2>Loading</h2>}
-      {items.length &&
+      {!items.length && null}
+      {items.length > 0 &&
         items.map(({ id, content, checked }: TaskProps): JSX.Element => {
           return (
             <Task

@@ -29,7 +29,7 @@ const Task = ({ content, open, id, taskRef, taskCardId, checked }: props) => {
     const url =
       userId + "/taskCards/" + taskCardId + "/tasks/" + id + "/content/";
 
-    open === false && handleUpdate({ db, data: contentState, url });
+    // open === false && handleUpdate({ db, data: contentState, url });
   }, [open]);
 
   return (

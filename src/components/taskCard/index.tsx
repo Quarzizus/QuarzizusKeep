@@ -11,16 +11,16 @@ import { TaskCardComponent } from "./styles";
 import { props as TaskProps } from "../task/interfaces";
 import { WrapperTaskCard } from "../wrapperTaskCard";
 
-const TaskCard = ({ title, id, tasks }: props) => {
+const TaskCard = ({ title, id, tasks, style }: props) => {
   const [open, setOpen] = useState<null | boolean>(null);
   const [items, setItems] = useState<TaskProps[]>(Object.values(tasks));
   const { transform, transition, setNodeRef, attributes, listeners } =
     useSortable({
       id: id,
     });
-  const style = {
+  const styles = {
     transform: CSS.Transform.toString(transform),
-    transition,
+    transition: transition,
   };
   const handleClick = (value: boolean) => {
     setOpen(value);
@@ -31,12 +31,13 @@ const TaskCard = ({ title, id, tasks }: props) => {
   }, [tasks]);
 
   return (
-    <WrapperTaskCard open={open} setNodeRef={setNodeRef} style={style}>
+    <WrapperTaskCard open={open} setNodeRef={setNodeRef} style={styles}>
       <TaskCardComponent
         onDoubleClick={() => {
           !open && handleClick(true);
         }}
         open={open}
+        style={style}
       >
         <TaskCardHeader
           taskCardId={id}

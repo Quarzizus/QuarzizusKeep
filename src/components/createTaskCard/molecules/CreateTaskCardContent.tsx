@@ -1,17 +1,16 @@
-import { Task } from "../task";
-import { props as TaskProps } from "../task/interfaces";
-import { props as TaskCardProps } from "../taskCard/interfaces";
+import { Task } from "../../task";
+import { props as TaskProps } from "../../task/interfaces";
 
 interface props {
-  items: TaskCardProps;
+  items: { [key: string]: TaskProps };
   open: boolean;
 }
 
 const CreateTaskCardContent = ({ items, open }: props) => {
   return (
     <>
-      {items.tasks &&
-        Object.values(items.tasks).map(
+      {items &&
+        Object.values(items).map(
           ({ id, content, checked }: TaskProps): JSX.Element => {
             return (
               <Task

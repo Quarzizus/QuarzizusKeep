@@ -2,7 +2,6 @@ import styled from "styled-components";
 import Masonry from "react-masonry-css";
 
 const ContainerMasonry = styled(Masonry)`
-  padding: 15px;
   height: 100%;
   width: 100%;
   display: flex;
@@ -40,7 +39,7 @@ const ContainerMasonry = styled(Masonry)`
 
   @media screen and (max-width: 700px) {
     width: 80%;
-    padding: 15px 10px 15px 0;
+    /* padding: 15px 10px 15px 0; */
     /* background-color: red; */
   }
 `;

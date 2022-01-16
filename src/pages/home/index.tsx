@@ -6,6 +6,7 @@ import { AppContext } from "../../context/AppContext";
 import { CreateTaskCard } from "../../components/createTaskCard";
 import { HomePage } from "./styles";
 import { TaskCard } from "../../components/taskCard";
+import { CreateTaskCardContainer } from "../../containers/CreateTaskCardContainer";
 
 const Home = () => {
   const { userId, loading, error, taskCards, getTaskCard } =
@@ -17,7 +18,7 @@ const Home = () => {
     <>
       <Sidebar />
       <HomePage>
-        <CreateTaskCard />
+        <CreateTaskCardContainer />
         {/* {error !== null && <h2>Error Mijo</h2>} */}
         {!userId && <h2>No hay userID</h2>}
         {loading && <Spinner />}

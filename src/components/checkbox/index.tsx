@@ -20,7 +20,7 @@ const CheckBox = ({ isChecked, setIsChecked, url }: props): JSX.Element => {
     <CheckBoxComponent
       onClick={() => {
         handleClick();
-        handleUpdate({ db, data: !isChecked, url });
+        // handleUpdate({ db, data: !isChecked, url });
       }}
     >
       {isChecked && <Icon icon={faCheck} />}

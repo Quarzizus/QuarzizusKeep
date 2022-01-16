@@ -1,42 +1,34 @@
 import { faPlusSquare } from "@fortawesome/free-solid-svg-icons";
 import { child, getDatabase, push, ref } from "firebase/database";
-import { Dispatch, RefObject, SetStateAction } from "react";
-import { CreateTaskComponent, Icon } from "../createTask/styles";
-import { props as TaskCardProps } from "../taskCard/interfaces";
+import { Dispatch, RefObject, SetStateAction, useContext } from "react";
+import { CreateTaskComponent, Icon } from "../../createTask/styles";
+import { props as TaskCardProps } from "../../taskCard/interfaces";
+import { CreateTaskCardContext } from "../context/CreateTaskCardContext";
 
 interface props {
   createTaskInTaskCardRef: RefObject<HTMLParagraphElement>;
-  setData: Dispatch<SetStateAction<TaskCardProps>>;
   taskCardId: string;
-  titleState: string;
 }
 
 const CreateTaskInTaskCard = ({
   createTaskInTaskCardRef,
   taskCardId,
-  setData,
-  titleState,
 }: props) => {
   const db = getDatabase();
-
+  const { dispatch } = useContext(CreateTaskCardContext);
   const handleClick = () => {
     if (!createTaskInTaskCardRef.current?.textContent?.length) return;
     const taskPost: any = push(child(ref(db), taskCardId)).key;
     const taskData = {
-      content: createTaskInTaskCardRef.current?.textContent,
-      id: taskPost,
-      checked: false,
+      [taskPost]: {
+        content: createTaskInTaskCardRef.current?.textContent,
+        id: taskPost,
+        checked: false,
+      },
     };
-    setData((data: TaskCardProps) => {
-      return {
-        ...data,
-        id: taskCardId,
-        title: titleState,
-        tasks: {
-          ...data.tasks,
-          [taskPost]: taskData,
-        },
-      };
+    dispatch({
+      type: "ADD_TASK",
+      payload: taskData,
     });
     createTaskInTaskCardRef.current.textContent = "";
   };

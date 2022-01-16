@@ -42,7 +42,7 @@ const TaskCardHeader = ({
         [urlBase + "/title/"]: titleState,
         [urlBase + "/id/"]: taskCardId,
       };
-      update(ref(db), updates);
+      // update(ref(db), updates);
     }
   }, [open]);
 
@@ -60,7 +60,12 @@ const TaskCardHeader = ({
         {title}
       </h3>
       {!open && (
-        <Icon icon={faExpandArrowsAlt} {...listeners} {...attributes} />
+        <Icon
+          icon={faExpandArrowsAlt}
+          {...listeners}
+          {...attributes}
+          className="Icon-Droppable"
+        />
       )}
     </header>
   );
