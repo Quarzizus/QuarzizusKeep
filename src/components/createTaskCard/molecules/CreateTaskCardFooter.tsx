@@ -1,8 +1,6 @@
 import { getDatabase, ref, update } from "firebase/database";
 import { useContext } from "react";
 import { AppContext } from "../../../context/AppContext";
-import { handleUpdate } from "../../../utils/handleUpdate";
-import { props as TaskCardProps } from "../../taskCard/interfaces";
 import { CreateTaskCardContext } from "../context/CreateTaskCardContext";
 
 interface props {

@@ -12,7 +12,7 @@ const handleUpdate = ({
   const updates = {
     [url]: data,
   };
-  // return update(ref(db), updates);
+  return update(ref(db), updates);
 };
 
 export { handleUpdate };

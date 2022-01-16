@@ -10,10 +10,11 @@ import { AppContext } from "../../context/AppContext";
 import { getDatabase } from "firebase/database";
 import { handleUpdate } from "../../utils/handleUpdate";
 
-const Task = ({ content, open, id, taskRef, taskCardId, checked }: props) => {
+const Task = ({ content, open, id, taskCardId, children }: props) => {
   const { userId } = useContext(AppContext);
-  const [isChecked, setIsChecked] = useState(checked);
-  const [contentState, setContentState] = useState(content);
+  // Checked component
+  // const [isChecked, setIsChecked] = useState(checked);
+  // const [contentState, setContentState] = useState(content);
   const db = getDatabase();
 
   const { attributes, listeners, setNodeRef, transform, transition } =
@@ -25,29 +26,26 @@ const Task = ({ content, open, id, taskRef, taskCardId, checked }: props) => {
     transition,
   };
 
-  useEffect(() => {
-    const url =
-      userId + "/taskCards/" + taskCardId + "/tasks/" + id + "/content/";
+  // useEffect(() => {
+  //   const url =
+  //     userId + "/taskCards/" + taskCardId + "/tasks/" + id + "/content/";
 
-    // open === false && handleUpdate({ db, data: contentState, url });
-  }, [open]);
+  //   // open === false && handleUpdate({ db, data: contentState, url });
+  // }, [open]);
 
   return (
     <TaskComponent ref={setNodeRef} style={style}>
       {open && <Icon icon={faGripVertical} {...attributes} {...listeners} />}
-      <CheckBox
-        isChecked={isChecked}
-        setIsChecked={setIsChecked}
-        url={userId + "/taskCards/" + taskCardId + "/tasks/" + id + "/checked/"}
-      />
+      {children}
       <p
+        // obligatory
         contentEditable={open as boolean}
         suppressContentEditableWarning={true}
         spellCheck={false}
-        ref={taskRef}
+        // optionally
         onInput={({ target }: FormEvent<HTMLParagraphElement>) => {
           const { textContent } = target as HTMLParagraphElement;
-          setContentState(textContent);
+          // setContentState(textContent);
         }}
       >
         {content}

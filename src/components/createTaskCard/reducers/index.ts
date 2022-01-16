@@ -5,7 +5,8 @@ type ActionType =
   | { type: "PRINT_DATA" }
   | { type: "SET_TITLE"; payload: string }
   | { type: "RESTART_DATA" }
-  | { type: "ADD_TASK"; payload: { [key: string]: TaskProps } };
+  | { type: "ADD_TASK"; payload: { [key: string]: TaskProps } }
+  | { type: "EDIT_CHECKBOX"; payload: boolean | undefined; taskId: string };
 
 interface state {
   open: boolean;
@@ -48,6 +49,17 @@ const CreateTaskCardReducer = (state: state, action: ActionType) => {
         tasks: {
           ...state.tasks,
           ...action.payload,
+        },
+      };
+    case "EDIT_CHECKBOX":
+      return {
+        ...state,
+        tasks: {
+          ...state.tasks,
+          [action.taskId]: {
+            ...state.tasks[action.taskId],
+            checked: action.payload,
+          },
         },
       };
     default:

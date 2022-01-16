@@ -1,4 +1,8 @@
-import { useRef } from "react";
+import { getDatabase } from "firebase/database";
+import { useContext, useRef } from "react";
+import { AppContext } from "../../context/AppContext";
+import { handleUpdate } from "../../utils/handleUpdate";
+import { CheckBox } from "../checkbox";
 import { CreateTask } from "../createTask";
 import { Task } from "../task";
 import { props as TaskProps } from "../task/interfaces";
@@ -10,12 +14,16 @@ interface props {
 }
 
 const TaskCardContent = ({ items, open, taskCardId }: props) => {
+  const { userId } = useContext(AppContext);
+  const db = getDatabase();
   const createTaskRef = useRef<HTMLParagraphElement>(null);
   return (
     <ul>
       {!items.length && null}
       {items.length > 0 &&
         items.map(({ id, content, checked }: TaskProps): JSX.Element => {
+          const urlPostChecked =
+            userId + "/taskCards/" + taskCardId + "/tasks/" + id + "/checked/";
           return (
             <Task
               key={id}
@@ -23,8 +31,14 @@ const TaskCardContent = ({ items, open, taskCardId }: props) => {
               content={content}
               open={open}
               taskCardId={taskCardId}
-              checked={checked}
-            />
+            >
+              <CheckBox
+                isChecked={checked}
+                cb={(value: boolean | undefined) =>
+                  handleUpdate({ db, data: value, url: urlPostChecked })
+                }
+              />
+            </Task>
           );
         })}
       {open && (
