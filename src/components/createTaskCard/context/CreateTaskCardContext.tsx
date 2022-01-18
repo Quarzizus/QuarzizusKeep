@@ -15,7 +15,9 @@ interface ContextProps {
 const CreateTaskCardContext = createContext({} as ContextProps);
 
 const CreateTaskCardProvider = ({ children }: props) => {
-  const { userId } = useContext(AppContext);
+  const {
+    state: { userId },
+  } = useContext(AppContext);
   const db = getDatabase();
   const reference = useRef<HTMLParagraphElement>({} as HTMLParagraphElement);
   const id = push(child(ref(db), userId)).key;

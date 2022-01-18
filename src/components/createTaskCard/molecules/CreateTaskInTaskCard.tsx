@@ -16,13 +16,14 @@ const CreateTaskInTaskCard = ({
 }: props) => {
   const db = getDatabase();
   const { dispatch } = useContext(CreateTaskCardContext);
-  const handleClick = () => {
+
+  const createNewTask = () => {
     if (!createTaskInTaskCardRef.current?.textContent?.length) return;
-    const taskPost: any = push(child(ref(db), taskCardId)).key;
+    const taskId: any = push(child(ref(db), taskCardId)).key;
     const taskData = {
-      [taskPost]: {
+      [taskId]: {
         content: createTaskInTaskCardRef.current?.textContent,
-        id: taskPost,
+        id: taskId,
         checked: false,
       },
     };
@@ -35,7 +36,7 @@ const CreateTaskInTaskCard = ({
 
   return (
     <CreateTaskComponent>
-      <button onClick={handleClick}>
+      <button onClick={createNewTask}>
         <Icon icon={faPlusSquare} />
       </button>
       <p
@@ -46,7 +47,7 @@ const CreateTaskInTaskCard = ({
         onKeyPress={(e) => {
           if (e.key === "Enter") {
             e.preventDefault();
-            handleClick();
+            createNewTask();
           }
         }}
       ></p>

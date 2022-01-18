@@ -7,4 +7,10 @@ interface props {
   style?: any;
 }
 
-export type { props };
+interface TaskCardDataProperties {
+  title: string;
+  taskCardId: string;
+  tasks: { [key: string]: Task };
+}
+
+export type { props, TaskCardDataProperties };

@@ -1,8 +1,8 @@
 import { CreateTaskComponent, Icon } from "./styles";
 import { faPlusSquare } from "@fortawesome/free-solid-svg-icons";
 import React, { RefObject, useContext, useEffect } from "react";
-import { AppContext } from "../../context/AppContext";
-import { child, getDatabase, push, ref, update } from "firebase/database";
+import { child, getDatabase, push, ref } from "firebase/database";
+import { TaskCardContext } from "../taskCard/context/TaskCardContext";
 
 interface props {
   createTaskRef: RefObject<HTMLParagraphElement>;
@@ -11,7 +11,7 @@ interface props {
 }
 
 const CreateTask = ({ createTaskRef, open, taskCardId }: props) => {
-  const { userId, getTaskCard } = useContext(AppContext);
+  const { dispatch } = useContext(TaskCardContext);
   const db = getDatabase();
 
   useEffect(() => {
@@ -21,35 +21,32 @@ const CreateTask = ({ createTaskRef, open, taskCardId }: props) => {
   const createNewTask = () => {
     if (!createTaskRef.current?.textContent?.length) return;
 
-    const taskId = push(child(ref(db), "posts")).key;
-    const postData = {
-      id: taskId,
-      content: createTaskRef.current?.textContent,
-      checked: false,
+    const taskId: any = push(child(ref(db), taskCardId as string)).key;
+    const taskData = {
+      [taskId]: {
+        content: createTaskRef.current?.textContent,
+        id: taskId,
+        checked: false,
+      },
     };
-    const updates = {
-      [userId + "/taskCards/" + taskCardId + "/tasks/" + taskId]: postData,
-    };
+    dispatch({
+      type: "ADD_TASK",
+      payload: taskData,
+    });
+
     createTaskRef.current.textContent = "";
-    // return update(ref(db), updates);
   };
 
   const handleKeyPress = (e: React.KeyboardEvent<HTMLParagraphElement>) => {
     if (e.key === "Enter") {
       e.preventDefault();
       createNewTask();
-      getTaskCard();
     }
-  };
-
-  const handleClick = () => {
-    createNewTask();
-    getTaskCard();
   };
 
   return (
     <CreateTaskComponent>
-      <button onClick={handleClick}>
+      <button onClick={createNewTask}>
         <Icon icon={faPlusSquare} />
       </button>
       <p

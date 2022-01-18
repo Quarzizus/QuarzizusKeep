@@ -1,11 +1,8 @@
 import { DraggableSyntheticListeners } from "@dnd-kit/core";
-import { Icon } from "./styles";
+import { Icon } from "../styles";
 import { faExpandArrowsAlt } from "@fortawesome/free-solid-svg-icons";
-import { FormEvent, useContext, useEffect, useState } from "react";
-import { handleUpdate } from "../../utils/handleUpdate";
-import { getDatabase, ref, update } from "firebase/database";
-import { AppContext } from "../../context/AppContext";
-import { props as TaskProps } from "../task/interfaces";
+import { FormEvent, useContext, useState } from "react";
+import { TaskCardContext } from "../context/TaskCardContext";
 
 interface Atributes {
   role: string;
@@ -16,35 +13,15 @@ interface Atributes {
 }
 
 interface props {
-  open: boolean | null;
   title: string | null;
   listeners: DraggableSyntheticListeners;
   attributes: Atributes;
-  taskCardId: string;
-  tasks: TaskProps[];
+  open: boolean | null;
 }
 
-const TaskCardHeader = ({
-  open,
-  title,
-  attributes,
-  listeners,
-  taskCardId,
-}: props) => {
+const TaskCardHeader = ({ title, attributes, listeners, open }: props) => {
+  const { dispatch } = useContext(TaskCardContext);
   const [titleState, setTitleState] = useState(title);
-  const db = getDatabase();
-  const { userId } = useContext(AppContext);
-  useEffect(() => {
-    const urlBase = userId + "/taskCards/" + taskCardId;
-
-    if (open === false) {
-      const updates = {
-        [urlBase + "/title/"]: titleState,
-        [urlBase + "/id/"]: taskCardId,
-      };
-      // update(ref(db), updates);
-    }
-  }, [open]);
 
   return (
     <header>
@@ -56,6 +33,12 @@ const TaskCardHeader = ({
           const { textContent } = target as HTMLHeadElement;
           setTitleState(textContent);
         }}
+        onBlur={() =>
+          dispatch({
+            type: "SET_TITLE",
+            payload: titleState as string,
+          })
+        }
       >
         {title}
       </h3>

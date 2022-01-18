@@ -11,7 +11,9 @@ import { getDatabase } from "firebase/database";
 import { handleUpdate } from "../../utils/handleUpdate";
 
 const Task = ({ content, open, id, taskCardId, children }: props) => {
-  const { userId } = useContext(AppContext);
+  const {
+    state: { userId },
+  } = useContext(AppContext);
   // Checked component
   // const [isChecked, setIsChecked] = useState(checked);
   // const [contentState, setContentState] = useState(content);

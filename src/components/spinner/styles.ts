@@ -2,9 +2,7 @@ import styled from "styled-components";
 
 const SpinnerComponent = styled.svg`
   & {
-    position: absolute;
-    left: calc(50% - 75px);
-    top: calc(50% - 75px);
+    grid-row: 2/3;
     width: 150px;
     height: 150px;
     animation: rotate 2s linear infinite;

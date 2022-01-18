@@ -1,8 +1,8 @@
 import { getDatabase, onValue, ref } from "firebase/database";
-import { useEffect, useState } from "react";
-import { squeleton } from "../db/index";
+import { useReducer, useState } from "react";
 import { AppContext } from "./AppContext";
-import { TaskCardPropsExtend, UserData } from "./interfaces";
+import { AppReducer } from "../reducers";
+import { state } from "../reducers";
 
 interface ContextProviderProps {
   children: JSX.Element | JSX.Element[];
@@ -16,41 +16,48 @@ const ContextProvider = ({ children }: ContextProviderProps) => {
       return "";
     }
   });
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<any>(null);
-  const [userData, setUserData] = useState<UserData>(squeleton);
-  const [taskCards, setTaskCards] = useState<TaskCardPropsExtend>(() => {
-    return Object.values(userData.taskCards);
-  });
+  const initialState: state = {
+    userId: userId,
+    email: "",
+    taskCards: {},
+    loading: true,
+    error: null,
+  };
+  const [state, dispatch] = useReducer(AppReducer, initialState);
 
   const db = getDatabase();
   const getTaskCard = async () => {
     try {
-      setLoading(true);
+      dispatch({
+        type: "SET_LOADING",
+        payload: true,
+      });
       const reference = ref(db, userId);
       onValue(reference, (snapshot) => {
         const data = snapshot.val();
-        const cards = Object.values(data.taskCards);
-        setTaskCards(cards as TaskCardPropsExtend);
+        dispatch({
+          type: "SET_TASKCARDS",
+          payload: data.taskCards,
+        });
       });
-      setLoading(false);
     } catch (err) {
-      setError(err);
+      dispatch({
+        type: "SET_ERROR",
+        payload: err,
+      });
       console.log(err);
-      setLoading(false);
+    } finally {
+      dispatch({
+        type: "SET_LOADING",
+        payload: false,
+      });
     }
   };
 
   const value = {
-    userId,
-    setUserId,
-    loading,
-    error,
-    userData,
+    state,
+    dispatch,
     getTaskCard,
-    setUserData,
-    taskCards,
-    setTaskCards,
   };
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;

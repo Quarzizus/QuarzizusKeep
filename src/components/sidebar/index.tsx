@@ -5,7 +5,9 @@ import { signOut, getAuth } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 
 const Sidebar = () => {
-  const { userId } = useContext(AppContext);
+  const {
+    state: { userId },
+  } = useContext(AppContext);
   const auth = getAuth();
   const navigate = useNavigate();
   const handleLogout = () => {

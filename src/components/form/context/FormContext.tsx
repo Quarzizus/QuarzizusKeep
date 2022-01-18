@@ -21,7 +21,7 @@ interface FormProviderProps {
 }
 
 const FormProvider = ({ children }: FormProviderProps) => {
-  const { setUserId } = useContext(AppContext);
+  const { dispatch } = useContext(AppContext);
 
   const [error, setError] = useState<any>(null);
   const GoogleProvider = new GoogleAuthProvider();
@@ -41,7 +41,10 @@ const FormProvider = ({ children }: FormProviderProps) => {
     )
       .then((userCredentials) => {
         const userId = userCredentials.user.uid;
-        setUserId(userId);
+        dispatch({
+          type: "SET_USERID",
+          payload: userId,
+        });
         setLocalStorage("userId", userId);
         return navigate("/home");
       })
@@ -61,7 +64,10 @@ const FormProvider = ({ children }: FormProviderProps) => {
     )
       .then((userCredentials) => {
         const userId = userCredentials.user.uid;
-        setUserId(userId);
+        dispatch({
+          type: "SET_USERID",
+          payload: userId,
+        });
         createInitialData(db, initialDataUser, userId);
         setLocalStorage("userId", userId);
 
@@ -76,7 +82,10 @@ const FormProvider = ({ children }: FormProviderProps) => {
     await signInWithPopup(auth, GoogleProvider)
       .then((result) => {
         const user = result.user;
-        setUserId(user.uid);
+        dispatch({
+          type: "SET_USERID",
+          payload: user.uid,
+        });
         setLocalStorage("userId", user.uid);
         createInitialData(db, initialDataUser, user.uid);
         navigate("/home");

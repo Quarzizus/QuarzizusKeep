@@ -1,22 +1,18 @@
 import { getDatabase, ref, update } from "firebase/database";
 import { useContext } from "react";
 import { AppContext } from "../../../context/AppContext";
-import { CreateTaskCardContext } from "../context/CreateTaskCardContext";
+import { TaskCardContext } from "../context/TaskCardContext";
 
-interface props {
-  taskCardId: string;
-}
-
-const CreateTaskCardFooter = ({ taskCardId }: props) => {
+const TaskCardFooter = () => {
   const db = getDatabase();
   const {
     state: { userId },
   } = useContext(AppContext);
 
   const {
-    state: { tasks, title },
+    state: { taskCardId, title, tasks },
     dispatch,
-  } = useContext(CreateTaskCardContext);
+  } = useContext(TaskCardContext);
 
   const handleSubmit = () => {
     const updates = {
@@ -32,16 +28,15 @@ const CreateTaskCardFooter = ({ taskCardId }: props) => {
     dispatch({
       type: "PRINT_DATA",
     });
-    dispatch({
-      type: "RESTART_DATA",
-    });
   };
 
   return (
     <footer>
-      <button onClick={handleSubmit}>Cerrar</button>
+      <button type="button" onClick={handleSubmit}>
+        Cerrar
+      </button>
     </footer>
   );
 };
 
-export { CreateTaskCardFooter };
+export { TaskCardFooter };

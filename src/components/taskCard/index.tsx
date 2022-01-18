@@ -1,62 +1,61 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useSortable } from "@dnd-kit/sortable";
 import { restrictToVerticalAxis } from "@dnd-kit/modifiers";
 import { CSS } from "@dnd-kit/utilities";
-import { DroppableProvider } from "../containerTasks/DroppableProvider";
+import { DroppableProvider } from "../../containers/containerTasks/DroppableProvider";
 import { props } from "./interfaces";
-import { TaskCardFooter } from "./TaskCardFooter";
-import { TaskCardHeader } from "./TaskCardHeader";
-import { TaskCardContent } from "./TaskCardContent";
+import { TaskCardFooter } from "./molecules/TaskCardFooter";
+import { TaskCardHeader } from "./molecules/TaskCardHeader";
+import { TaskCardContent } from "./molecules/TaskCardContent";
 import { TaskCardComponent } from "./styles";
 import { props as TaskProps } from "../task/interfaces";
 import { WrapperTaskCard } from "../wrapperTaskCard";
+import { TaskCardContext } from "./context/TaskCardContext";
 
-const TaskCard = ({ title, id, tasks, style }: props) => {
-  const [open, setOpen] = useState<null | boolean>(null);
-  const [items, setItems] = useState<TaskProps[]>(Object.values(tasks));
+const TaskCard = () => {
+  const {
+    state: { open, tasks, title, taskCardId },
+    dispatch,
+  } = useContext(TaskCardContext);
+
   const { transform, transition, setNodeRef, attributes, listeners } =
     useSortable({
-      id: id,
+      id: taskCardId as string,
     });
+
   const styles = {
     transform: CSS.Transform.toString(transform),
     transition: transition,
   };
-  const handleClick = (value: boolean) => {
-    setOpen(value);
-  };
-
-  useEffect(() => {
-    setItems(() => Object.values(tasks));
-  }, [tasks]);
 
   return (
     <WrapperTaskCard open={open} setNodeRef={setNodeRef} style={styles}>
       <TaskCardComponent
         onDoubleClick={() => {
-          !open && handleClick(true);
+          !open && dispatch({ type: "HANDLE_OPEN" });
         }}
         open={open}
-        style={style}
       >
         <TaskCardHeader
-          taskCardId={id}
           attributes={{ ...attributes }}
           listeners={{ ...listeners }}
-          open={open}
           title={title}
-          tasks={items}
+          open={open}
         />
-        <DroppableProvider
-          items={items}
+        {/* <DroppableProvider
+          items={tasks}
           modifiers={[restrictToVerticalAxis]}
           setItems={setItems}
-        >
-          {items && (
-            <TaskCardContent items={items} open={open} taskCardId={id} />
-          )}
-        </DroppableProvider>
-        {open && <TaskCardFooter handleClick={handleClick} />}
+        > */}
+        {tasks && (
+          <TaskCardContent
+            items={tasks}
+            open={open}
+            taskCardId={taskCardId as string}
+          />
+        )}
+        {/* </DroppableProvider> */}
+        {open && <TaskCardFooter />}
       </TaskCardComponent>
     </WrapperTaskCard>
   );

@@ -1,6 +1,6 @@
 import { Sidebar } from "../../components/sidebar";
 import { Spinner } from "../../components/spinner";
-import { ContainerTasks } from "../../components/containerTasks";
+import { ContainerTasks } from "../../containers/containerTasks";
 import { useContext, useEffect } from "react";
 import { AppContext } from "../../context/AppContext";
 import { CreateTaskCard } from "../../components/createTaskCard";
@@ -9,8 +9,10 @@ import { TaskCard } from "../../components/taskCard";
 import { CreateTaskCardContainer } from "../../containers/CreateTaskCardContainer";
 
 const Home = () => {
-  const { userId, loading, error, taskCards, getTaskCard } =
-    useContext(AppContext);
+  const {
+    state: { userId, loading, error, taskCards },
+    getTaskCard,
+  } = useContext(AppContext);
   useEffect(() => {
     getTaskCard();
   }, []);
