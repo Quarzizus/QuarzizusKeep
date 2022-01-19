@@ -4,7 +4,8 @@ type ActionType =
   | { type: "HANDLE_OPEN" }
   | { type: "SET_TITLE"; payload: string }
   | { type: "PRINT_DATA" }
-  | { type: "ADD_TASK"; payload: { [key: string]: TaskProps } };
+  | { type: "ADD_TASK"; payload: { [key: string]: TaskProps } }
+  | { type: "EDIT_TASK_CONTENT"; payload: string; taskId: string };
 
 interface state {
   open: boolean;
@@ -41,6 +42,17 @@ const taskCardReducer = (state: state, action: ActionType) => {
         tasks: {
           ...state.tasks,
           ...action.payload,
+        },
+      };
+    case "EDIT_TASK_CONTENT":
+      return {
+        ...state,
+        tasks: {
+          ...state.tasks,
+          [action.taskId]: {
+            ...state.tasks[action.taskId],
+            content: action.payload,
+          },
         },
       };
     default:
