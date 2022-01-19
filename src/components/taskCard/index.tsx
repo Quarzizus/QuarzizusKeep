@@ -22,12 +22,14 @@ const TaskCard = () => {
     useSortable({
       id: taskCardId as string,
     });
-
   const styles = {
     transform: CSS.Transform.toString(transform),
     transition: transition,
   };
-
+  const [items, setItems] = useState(() => Object.values(tasks));
+  useEffect(() => {
+    setItems(Object.values(tasks));
+  }, [tasks]);
   return (
     <WrapperTaskCard open={open} setNodeRef={setNodeRef} style={styles}>
       <TaskCardComponent
@@ -42,19 +44,19 @@ const TaskCard = () => {
           title={title}
           open={open}
         />
-        {/* <DroppableProvider
-          items={tasks}
+        <DroppableProvider
+          items={items}
           modifiers={[restrictToVerticalAxis]}
           setItems={setItems}
-        > */}
-        {tasks && (
-          <TaskCardContent
-            items={tasks}
-            open={open}
-            taskCardId={taskCardId as string}
-          />
-        )}
-        {/* </DroppableProvider> */}
+        >
+          {items && (
+            <TaskCardContent
+              items={items}
+              open={open}
+              taskCardId={taskCardId as string}
+            />
+          )}
+        </DroppableProvider>
         {open && <TaskCardFooter />}
       </TaskCardComponent>
     </WrapperTaskCard>

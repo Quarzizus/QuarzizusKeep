@@ -43,6 +43,7 @@ const AppReducer = (state: state, action: ActionType) => {
         ...state,
         userId: action.payload,
       };
+
     default:
       return state;
   }

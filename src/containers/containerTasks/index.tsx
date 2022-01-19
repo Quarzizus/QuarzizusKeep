@@ -1,14 +1,15 @@
 import { TaskCard } from "../../components/taskCard";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { DroppableProvider } from "./DroppableProvider";
 import { ContainerMasonry } from "./styles";
 import { props as TaskCardProps } from "../../components/taskCard/interfaces";
 import { AppContext } from "../../context/AppContext";
 import { TaskCardProvider } from "../../components/taskCard/context/TaskCardContext";
+import { Spinner } from "../../components/spinner";
 
 const ContainerTasks = (): JSX.Element => {
   const {
-    state: { taskCards },
+    state: { taskCards, loading },
   } = useContext(AppContext);
   const breakpointColumnsObj = {
     default: 4,
@@ -16,24 +17,28 @@ const ContainerTasks = (): JSX.Element => {
     930: 2,
     700: 1,
   };
+  const [items, setItems] = useState(() => Object.values(taskCards));
+  useEffect(() => {
+    setItems(Object.values(taskCards));
+  }, [taskCards]);
   return (
     <>
-      {/* <DroppableProvider items={taskCards} setItems={setTaskCards}> */}
-      <ContainerMasonry className="WW" breakpointCols={breakpointColumnsObj}>
-        {Object.values(taskCards).map(({ id, tasks, title }: TaskCardProps) => {
-          return (
-            <TaskCardProvider
-              key={id}
-              taskCardId={id}
-              title={title}
-              tasks={tasks}
-            >
-              <TaskCard />
-            </TaskCardProvider>
-          );
-        })}
-      </ContainerMasonry>
-      {/* </DroppableProvider> */}
+      <DroppableProvider items={items} setItems={setItems}>
+        <ContainerMasonry className="WW" breakpointCols={breakpointColumnsObj}>
+          {items.map(({ id, tasks, title }: TaskCardProps) => {
+            return (
+              <TaskCardProvider
+                key={id}
+                taskCardId={id}
+                title={title}
+                tasks={tasks}
+              >
+                <TaskCard />
+              </TaskCardProvider>
+            );
+          })}
+        </ContainerMasonry>
+      </DroppableProvider>
     </>
   );
 };
