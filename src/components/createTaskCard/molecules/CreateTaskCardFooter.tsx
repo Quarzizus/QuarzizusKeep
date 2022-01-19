@@ -24,7 +24,8 @@ const CreateTaskCardFooter = ({ taskCardId }: props) => {
       ["/" + userId + "/taskCards/" + taskCardId + "/title/"]: title,
       ["/" + userId + "/taskCards/" + taskCardId + "/tasks/"]: tasks,
     };
-    update(ref(db), updates);
+
+    Object.values(tasks).length && update(ref(db), updates);
 
     dispatch({
       type: "HANDLE_OPEN",

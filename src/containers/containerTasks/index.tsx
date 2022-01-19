@@ -5,7 +5,6 @@ import { ContainerMasonry } from "./styles";
 import { props as TaskCardProps } from "../../components/taskCard/interfaces";
 import { AppContext } from "../../context/AppContext";
 import { TaskCardProvider } from "../../components/taskCard/context/TaskCardContext";
-import { Spinner } from "../../components/spinner";
 
 const ContainerTasks = (): JSX.Element => {
   const {

@@ -23,6 +23,7 @@ const Home = () => {
         <CreateTaskCardContainer />
         {/* {error !== null && <h2>Error Mijo</h2>} */}
         {!userId && <h2>No hay userID</h2>}
+        {userId && loading && <Spinner />}
         {userId && !loading && <ContainerTasks />}
       </HomePage>
     </>
