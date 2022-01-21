@@ -17,7 +17,8 @@ type ActionType =
       type: "SET_TASKCARDS";
       payload: { [key: string]: TaskCardProps };
     }
-  | { type: "SET_USERID"; payload: string };
+  | { type: "SET_USERID"; payload: string }
+  | { type: "SET_EMAIL"; payload: string };
 
 const AppReducer = (state: state, action: ActionType) => {
   switch (action.type) {
@@ -43,7 +44,12 @@ const AppReducer = (state: state, action: ActionType) => {
         ...state,
         userId: action.payload,
       };
-
+    case "SET_EMAIL":
+      return {
+        ...state,
+        taskCards: { ...state.taskCards },
+        email: action.payload,
+      };
     default:
       return state;
   }

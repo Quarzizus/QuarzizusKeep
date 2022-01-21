@@ -68,6 +68,7 @@ const FormProvider = ({ children }: FormProviderProps) => {
           type: "SET_USERID",
           payload: userId,
         });
+
         createInitialData(db, initialDataUser, userId);
         setLocalStorage("userId", userId);
 
@@ -85,6 +86,10 @@ const FormProvider = ({ children }: FormProviderProps) => {
         dispatch({
           type: "SET_USERID",
           payload: user.uid,
+        });
+        dispatch({
+          type: "SET_EMAIL",
+          payload: user.email as string,
         });
         setLocalStorage("userId", user.uid);
         createInitialData(db, initialDataUser, user.uid);

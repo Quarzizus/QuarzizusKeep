@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 
 const Sidebar = () => {
   const {
-    state: { userId },
+    state: { userId, email },
   } = useContext(AppContext);
   const auth = getAuth();
   const navigate = useNavigate();
@@ -20,6 +20,7 @@ const Sidebar = () => {
     <Aside>
       <button onClick={handleLogout}>Log out</button>
       <h2>{userId}</h2>
+      <h3>{email}</h3>
     </Aside>
   );
 };
