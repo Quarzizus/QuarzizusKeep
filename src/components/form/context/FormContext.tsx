@@ -9,7 +9,6 @@ import { createContext, useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AppContext } from "../../../context/AppContext";
 import { Credentials, FormContextProps } from "../interfaces";
-import { getDatabase } from "firebase/database";
 import { createInitialData } from "../utils/createInitialData";
 import { initialDataUser } from "../../../db";
 import { setLocalStorage } from "../utils/setLocalStorage";
@@ -26,7 +25,6 @@ const FormProvider = ({ children }: FormProviderProps) => {
   const [error, setError] = useState<any>(null);
   const GoogleProvider = new GoogleAuthProvider();
   const auth = getAuth();
-  const db = getDatabase();
   const navigate = useNavigate();
 
   const handleSignInUser = async ({
@@ -69,7 +67,7 @@ const FormProvider = ({ children }: FormProviderProps) => {
           payload: userId,
         });
 
-        createInitialData(db, initialDataUser, userId);
+        createInitialData(initialDataUser, userId);
         setLocalStorage("userId", userId);
 
         navigate("/home");
@@ -92,7 +90,7 @@ const FormProvider = ({ children }: FormProviderProps) => {
           payload: user.email as string,
         });
         setLocalStorage("userId", user.uid);
-        createInitialData(db, initialDataUser, user.uid);
+        createInitialData(initialDataUser, user.uid);
         navigate("/home");
       })
       .catch((error) => {
