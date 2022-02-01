@@ -4,7 +4,7 @@ const CreateTaskCardComponent = styled.section`
   margin: 20px 0;
   min-height: 50px;
   width: 500px;
-  background-color: black;
+  background-color: transparent;
   grid-row: 1/-2;
   cursor: pointer;
   border-radius: 10px;
@@ -12,9 +12,9 @@ const CreateTaskCardComponent = styled.section`
   color: #fff;
   display: flex;
   flex-direction: column;
-  border: 1px solid rgba(255, 255, 255, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   &:hover {
-    border: 1px solid rgba(255, 255, 255, 1);
+    border: 1px solid rgba(255, 255, 255, 0.5);
   }
   h2 {
     font-weight: 400;

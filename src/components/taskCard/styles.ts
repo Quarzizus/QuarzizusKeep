@@ -6,7 +6,7 @@ interface props {
 }
 
 const TaskCardComponent = styled.article<props>`
-  background-color: #020202;
+  background-color: #104547;
   transition: all 0s linear;
   cursor: pointer;
   border-radius: 10px;
@@ -16,7 +16,7 @@ const TaskCardComponent = styled.article<props>`
   flex-direction: column;
   justify-content: space-between;
   transition: 0.5s ease all;
-  border: 2px solid rgba(98, 195, 112, 0.5);
+  border: 2px solid transparent;
   width: 100%;
   ${({ open }) =>
     open
@@ -28,7 +28,7 @@ const TaskCardComponent = styled.article<props>`
           max-height: 400px;
           overflow: hidden;
           &:hover {
-            border: 2px solid rgba(98, 195, 112);
+            border: 2px solid rgba(255, 255, 255, 0.5);
           }
         `}
 

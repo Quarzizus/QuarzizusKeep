@@ -9,7 +9,6 @@ const WrapperTaskCardComponent = styled.div<props>`
     open
       ? css`
           width: 100vw;
-          background-color: #0007;
           height: 100vh;
           display: flex;
           align-items: center;

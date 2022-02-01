@@ -3,12 +3,10 @@ import { useSortable } from "@dnd-kit/sortable";
 import { restrictToVerticalAxis } from "@dnd-kit/modifiers";
 import { CSS } from "@dnd-kit/utilities";
 import { DroppableProvider } from "../../containers/containerTasks/DroppableProvider";
-import { props } from "./interfaces";
 import { TaskCardFooter } from "./molecules/TaskCardFooter";
 import { TaskCardHeader } from "./molecules/TaskCardHeader";
 import { TaskCardContent } from "./molecules/TaskCardContent";
 import { TaskCardComponent } from "./styles";
-import { props as TaskProps } from "../task/interfaces";
 import { WrapperTaskCard } from "../wrapperTaskCard";
 import { TaskCardContext } from "./context/TaskCardContext";
 
@@ -30,6 +28,7 @@ const TaskCard = () => {
   useEffect(() => {
     setItems(Object.values(tasks));
   }, [tasks]);
+
   return (
     <WrapperTaskCard open={open} setNodeRef={setNodeRef} style={styles}>
       <TaskCardComponent
