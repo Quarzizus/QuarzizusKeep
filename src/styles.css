@@ -12,6 +12,7 @@
 body {
   overflow: hidden;
   position: relative;
+  background-color: #1c1c1c;
 }
 .App {
   width: 100%;
