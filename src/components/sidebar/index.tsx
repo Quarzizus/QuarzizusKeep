@@ -7,13 +7,13 @@ import PerfilDefault from "../../images/perfildefault.png";
 
 const Sidebar = () => {
   const {
-    state: { userId, email },
+    state: { email },
   } = useContext(AppContext);
   const auth = getAuth();
   const navigate = useNavigate();
   const handleLogout = () => {
     signOut(auth);
-    localStorage.removeItem("userId");
+    localStorage.clear();
     navigate("/");
   };
   const handleShowAside = () => {
@@ -32,10 +32,9 @@ const Sidebar = () => {
         <picture>
           <img src={PerfilDefault} alt="" />
         </picture>
-        <h2>angelzizu@gmail.com</h2>
+        <h2>{email}</h2>
         <button onClick={handleLogout}>Log out</button>
       </ProfileCard>
-      {/* <h3>{email}</h3> */}
     </Aside>
   );
 };

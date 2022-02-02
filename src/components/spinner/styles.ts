@@ -6,7 +6,6 @@ const SpinnerComponent = styled.svg`
     width: 150px;
     height: 150px;
     animation: rotate 2s linear infinite;
-
     @keyframes rotate {
       0% {
         transform: rotate(0deg);

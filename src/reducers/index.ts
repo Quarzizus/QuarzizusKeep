@@ -3,6 +3,7 @@ import { props as TaskCardProps } from "../components/taskCard/interfaces";
 interface state {
   userId: string;
   email: string;
+  photo: string;
   taskCards: { [key: string]: TaskCardProps };
   loading: boolean;
   error: any;
@@ -18,7 +19,8 @@ type ActionType =
       payload: { [key: string]: TaskCardProps };
     }
   | { type: "SET_USERID"; payload: string }
-  | { type: "SET_EMAIL"; payload: string };
+  | { type: "SET_EMAIL"; payload: string }
+  | { type: "SET_PHOTO"; payload: string };
 
 const AppReducer = (state: state, action: ActionType) => {
   switch (action.type) {
@@ -49,6 +51,12 @@ const AppReducer = (state: state, action: ActionType) => {
         ...state,
         taskCards: { ...state.taskCards },
         email: action.payload,
+      };
+    case "SET_PHOTO":
+      return {
+        ...state,
+        taskCards: { ...state.taskCards },
+        photo: action.payload,
       };
     default:
       return state;

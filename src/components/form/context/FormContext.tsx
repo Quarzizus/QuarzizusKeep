@@ -38,12 +38,17 @@ const FormProvider = ({ children }: FormProviderProps) => {
       credentials.password
     )
       .then((userCredentials) => {
-        const userId = userCredentials.user.uid;
+        const user = userCredentials.user;
+        setLocalStorage("userId", user.uid);
         dispatch({
           type: "SET_USERID",
-          payload: userId,
+          payload: user.uid,
         });
-        setLocalStorage("userId", userId);
+        setLocalStorage("email", user.email);
+        dispatch({
+          type: "SET_EMAIL",
+          payload: user.email as string,
+        });
         return navigate("/home");
       })
       .catch((error) => {
@@ -61,15 +66,18 @@ const FormProvider = ({ children }: FormProviderProps) => {
       credentials.password
     )
       .then((userCredentials) => {
-        const userId = userCredentials.user.uid;
+        const user = userCredentials.user;
+        setLocalStorage("userId", user.uid);
         dispatch({
           type: "SET_USERID",
-          payload: userId,
+          payload: user.uid,
         });
-
-        createInitialData(initialDataUser, userId);
-        setLocalStorage("userId", userId);
-
+        setLocalStorage("email", user.email);
+        dispatch({
+          type: "SET_EMAIL",
+          payload: user.email as string,
+        });
+        createInitialData(initialDataUser, user.uid);
         navigate("/home");
       })
       .catch((error) => {
@@ -81,15 +89,20 @@ const FormProvider = ({ children }: FormProviderProps) => {
     await signInWithPopup(auth, GoogleProvider)
       .then((result) => {
         const user = result.user;
+        setLocalStorage("userId", user.uid);
         dispatch({
           type: "SET_USERID",
           payload: user.uid,
         });
+        setLocalStorage("email", user.email);
         dispatch({
           type: "SET_EMAIL",
           payload: user.email as string,
         });
-        setLocalStorage("userId", user.uid);
+        dispatch({
+          type: "SET_PHOTO",
+          payload: user.photoURL as string,
+        });
         createInitialData(initialDataUser, user.uid);
         navigate("/home");
       })

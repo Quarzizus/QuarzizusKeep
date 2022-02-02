@@ -9,7 +9,7 @@ import { Header } from "../../components/header";
 
 const Home = () => {
   const {
-    state: { userId, loading, error, taskCards },
+    state: { userId, loading, taskCards },
     getTaskCard,
   } = useContext(AppContext);
   useEffect(() => {
@@ -23,8 +23,12 @@ const Home = () => {
         <CreateTaskCardContainer />
         {/* {error !== null && <h2>Error Mijo</h2>} */}
         {!userId && <h2>No hay userID</h2>}
-        {userId && loading && <Spinner />}
-        {userId && !loading && <ContainerTasks />}
+        {userId && loading && Object.values(taskCards).length <= 0 && (
+          <Spinner />
+        )}
+        {userId && !loading && Object.values(taskCards).length > 0 && (
+          <ContainerTasks />
+        )}
       </CardsContainer>
     </HomePage>
   );

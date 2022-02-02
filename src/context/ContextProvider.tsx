@@ -3,22 +3,16 @@ import { useReducer, useState } from "react";
 import { AppContext } from "./AppContext";
 import { AppReducer } from "../reducers";
 import { state } from "../reducers";
+import { getLocalStorage } from "../utils/getLocalStorage";
 
 interface ContextProviderProps {
   children: JSX.Element | JSX.Element[];
 }
 const ContextProvider = ({ children }: ContextProviderProps) => {
-  const [userId, setUserId] = useState(() => {
-    try {
-      const uid = localStorage.getItem("userId");
-      return uid !== null ? JSON.parse(uid) : "";
-    } catch (error) {
-      return "";
-    }
-  });
   const initialState: state = {
-    userId: userId,
-    email: "",
+    userId: getLocalStorage("userId"),
+    email: getLocalStorage("email"),
+    photo: getLocalStorage("photo"),
     taskCards: {},
     loading: true,
     error: null,
@@ -32,7 +26,7 @@ const ContextProvider = ({ children }: ContextProviderProps) => {
         type: "SET_LOADING",
         payload: true,
       });
-      const reference = ref(db, userId);
+      const reference = ref(db, initialState.userId);
       onValue(reference, (snapshot) => {
         const data = snapshot.val();
         dispatch({

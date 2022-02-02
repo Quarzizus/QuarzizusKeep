@@ -8,7 +8,7 @@ import { TaskCardProvider } from "../../components/taskCard/context/TaskCardCont
 
 const ContainerTasks = (): JSX.Element => {
   const {
-    state: { taskCards, loading },
+    state: { taskCards },
   } = useContext(AppContext);
   const breakpointColumnsObj = {
     default: 4,
