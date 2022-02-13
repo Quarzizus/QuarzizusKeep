@@ -16,3 +16,4 @@ https://quarzizuskeep.web.app
 - React
 - Firebase (Hosting, Database, Auth)
 - Styled Components
+- Vite.js
