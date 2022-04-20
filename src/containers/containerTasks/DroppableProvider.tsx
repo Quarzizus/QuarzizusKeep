@@ -39,7 +39,6 @@ const DroppableProvider = ({ children, items, modifiers, setItems }: props) => {
       const newIndex = searchIndex(active.id);
       const oldIndex = searchIndex(over.id);
       const newArray = arrayMove(items, newIndex, oldIndex);
-      console.log(newArray);
       setItems(newArray);
     }
   };

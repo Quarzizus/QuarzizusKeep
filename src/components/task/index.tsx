@@ -39,7 +39,6 @@ const Task = ({ content, open, id, children }: props) => {
             payload: contentState as string,
             taskId: id,
           });
-          // console.log(contentState, id);
         }}
       >
         {content}

@@ -25,9 +25,7 @@ const TaskCardFooter = () => {
     dispatch({
       type: "HANDLE_OPEN",
     });
-    dispatch({
-      type: "PRINT_DATA",
-    });
+
   };
 
   return (

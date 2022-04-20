@@ -30,9 +30,7 @@ const CreateTaskCardFooter = ({ taskCardId }: props) => {
     dispatch({
       type: "HANDLE_OPEN",
     });
-    dispatch({
-      type: "PRINT_DATA",
-    });
+
     dispatch({
       type: "RESTART_DATA",
     });
