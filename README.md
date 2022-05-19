@@ -2,7 +2,7 @@
 
 ![](src/images/Portada.png)
 
-This project is a to-do app inspired by google keep.  
+This project is a TO-DO app inspired by google keep.  
 With it's we can create notes and sort in of draggable way.
 Also, it has a Mansory design.
 
